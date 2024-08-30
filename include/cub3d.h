@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ktakamat <ktakamat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:12:07 by ktakamat          #+#    #+#             */
-/*   Updated: 2024/08/30 15:16:09 by apple            ###   ########.fr       */
+/*   Updated: 2024/08/30 17:17:41 by ktakamat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,13 @@ typedef struct s_game
 	void	*win;
 	char	*str_line;
 	//新しく追加
+	char	**all_str;
+	char	*no_str;
+	char	*so_str;
+	char	*we_str;
+	char	*ea_str;
+	char	*f_str;
+	char	*c_str;
 	char	**map_str;
 	char	col_cnt;
 	char	all_col;
@@ -76,6 +83,7 @@ typedef struct s_game
 	int		xi;
 	int		yi;
 	int		error_item;
+	int		player_count;
 	bool	running;
 }	t_game;
 
@@ -106,6 +114,7 @@ void	ft_exit_error(const char *str);
 void	init_game(t_game *game);
 void	get_map_size(char *filename, t_game *game);
 void	map_load(char *filename, t_game *game);
+void	map_word_check(t_game *game);
 
 //debug.c
 void	print_map(t_game *game);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ktakamat <ktakamat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:40:52 by ktakamat          #+#    #+#             */
-/*   Updated: 2024/08/30 15:17:55 by apple            ###   ########.fr       */
+/*   Updated: 2024/08/30 17:32:15 by ktakamat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	ft_cub3d(int argc, char **argv)
 	init_game(game);
 	//マップの情報を書き出す
 	map_load(argv[1], game);
+	//マップがN,E,W,S,0,1,space,\nでなりたっているかを確認し、playerの数をカウントする
+	// map_word_check(game);
 }
 
 int	main(int argc, char **argv)
