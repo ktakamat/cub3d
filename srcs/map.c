@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktakamat <ktakamat@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:41:31 by ktakamat          #+#    #+#             */
-/*   Updated: 2024/08/29 18:54:42 by ktakamat         ###   ########.fr       */
+/*   Updated: 2024/08/29 22:04:22 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../include/cub3d.h"
 
 char	*ft_strjoin_new(char *s1, const char *s2)
 {
@@ -24,7 +24,7 @@ char	*ft_strjoin_new(char *s1, const char *s2)
 		return (NULL);
 	a = (char *)ft_calloc(sizeof(*a), (len_s1 + len_s2) + 1);
 	if (a == NULL)
-		ft_exit();
+		ft_exit_error("map error 1");
 	ft_strlcpy(a, s1, len_s1 + 1);
 	ft_strlcat(a, s2, len_s1 + len_s2 + 1);
 	if (a[len_s1 + len_s2 - 1] == '\n')
@@ -44,8 +44,9 @@ void	map_word(char *map_str)
 			return ;
 		if (*map_str != '1' && *map_str != 'N'
 			&& *map_str != 'S' && *map_str != 'E'
-			&& *map_str != 'W' && *map_str != ' ' && *map_str != '\n')
-			ft_exit();
+			&& *map_str != 'W' && *map_str != ' ' && *map_str != '\n'
+			&& *map_str != '0')
+			ft_exit_error("map error 2");
 		map_str++;
 	}
 }
@@ -59,7 +60,7 @@ void	map_read(char *filename, t_game *game)
 	game->error_item = 0;
 	line = get_next_line(fd);
 	if (line == NULL || *line == '\0' || *line == '\n')
-		ft_exit();
+		ft_exit_error("map error 3");
 	if (line[ft_strlen(line) - 1] == '\n')
 		line[ft_strlen(line) - 1] = '\0';
 	game->hei = 0;

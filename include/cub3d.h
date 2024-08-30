@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktakamat <ktakamat@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:12:07 by ktakamat          #+#    #+#             */
-/*   Updated: 2024/08/29 17:26:58 by ktakamat         ###   ########.fr       */
+/*   Updated: 2024/08/30 15:16:09 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@
 # include <limits.h>
 # include <fcntl.h>
 # include "../libft/libft.h"
+# include "../libft/ft_get_next_line/get_next_line.h"
 # include "../libft/ft_printf.h"
-# include "../minilibx-linux/mlx.h"
+// # include "../minilibx-linux/mlx.h"
 # include <stdbool.h>
 
 # define X_EVENT_KEY_PRESS 2
@@ -64,6 +65,8 @@ typedef struct s_game
 	void	*mx;
 	void	*win;
 	char	*str_line;
+	//新しく追加
+	char	**map_str;
 	char	col_cnt;
 	char	all_col;
 	int		walk_cnt;
@@ -92,5 +95,19 @@ typedef struct s_last
 	char	*last_line_end;
 	char	*ptr;
 }	t_last;
+
+//map.c
+void	map_read(char *filename, t_game *game);
+
+//utli.c
+void	ft_exit_error(const char *str);
+
+//map_read.c
+void	init_game(t_game *game);
+void	get_map_size(char *filename, t_game *game);
+void	map_load(char *filename, t_game *game);
+
+//debug.c
+void	print_map(t_game *game);
 
 #endif

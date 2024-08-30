@@ -3,34 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktakamat <ktakamat@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:40:52 by ktakamat          #+#    #+#             */
-/*   Updated: 2024/08/29 19:07:46 by ktakamat         ###   ########.fr       */
+/*   Updated: 2024/08/30 15:17:55 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-
-int	main(int argc, char **argv)
-{
-	if (argc < 2 || argc > 3)
-	{
-		ft_printf("Error\n");
-		ft_exit();
-	}
-	
-}
+#include "../include/cub3d.h"
 
 void	ft_cub3d(int argc, char **argv)
 {
 	t_game	*game;
 
 	game = (t_game *)ft_calloc(sizeof(t_game), 1);
-	map_read(argv[1], &game);
+	// map_read(argv[1], game);
+	init_game(game);
 	//マップの情報を書き出す
-	int j, i;
-	j = 0;
-	i = 0;
-	while ()
+	map_load(argv[1], game);
+}
+
+int	main(int argc, char **argv)
+{
+	if (argc < 2 || argc > 3)
+		ft_exit_error("Error\nInvalid number of arguments");
+	ft_cub3d(argc, argv);
 }

@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exit.c                                          :+:      :+:    :+:   */
+/*   utlis.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/25 20:06:52 by ktakamat          #+#    #+#             */
-/*   Updated: 2024/08/29 21:03:39 by apple            ###   ########.fr       */
+/*   Created: 2024/08/29 21:03:54 by apple             #+#    #+#             */
+/*   Updated: 2024/08/29 21:31:53 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/cub3d.h"
 
-// void	ft_exit(void)
-// {
-// 	ft_printf("Error\n");
-// 	exit(EXIT_FAILURE);
-// }
+void	ft_exit_error(const char *str)
+{
+	ft_printf("%s\n", str);
+	exit(EXIT_FAILURE);
+}
