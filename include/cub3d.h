@@ -6,7 +6,7 @@
 /*   By: ktakamat <ktakamat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:12:07 by ktakamat          #+#    #+#             */
-/*   Updated: 2024/08/30 17:17:41 by ktakamat         ###   ########.fr       */
+/*   Updated: 2024/08/31 19:53:34 by ktakamat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_game
 	t_mlx	mlx;
 	t_img	img;
 	size_t	hei;
+	size_t	hei2;
 	size_t	wid;
 	void	*mx;
 	void	*win;
@@ -115,6 +116,10 @@ void	init_game(t_game *game);
 void	get_map_size(char *filename, t_game *game);
 void	map_load(char *filename, t_game *game);
 void	map_word_check(t_game *game);
+void	split_line(t_game *game);
+void	get_map_size(char *filename, t_game *game);
+void	map_check(t_game game);
+void	store_map(t_game *game);
 
 //debug.c
 void	print_map(t_game *game);

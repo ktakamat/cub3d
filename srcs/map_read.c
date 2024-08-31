@@ -6,7 +6,7 @@
 /*   By: ktakamat <ktakamat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 21:36:40 by apple             #+#    #+#             */
-/*   Updated: 2024/08/30 17:53:13 by ktakamat         ###   ########.fr       */
+/*   Updated: 2024/08/31 19:56:30 by ktakamat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,35 +54,35 @@ void	split_line(t_game *game)
 //にじ配列の幅と高さを取得する
 void get_map_size(char *filename, t_game *game)
 {
-    int fd;
-    char *line;
-    int width;
-    int height;
+	int		fd;
+	char	*line;
+	int		width;
+	int		height;
 
-    fd = open(filename, O_RDONLY);
-    if (fd < 0)
-        ft_exit_error("Error\nFailed to open file");
-    width = 0;
-    height = 0;
-    // 最初の行を読み込む
-    line = get_next_line(fd);
-    if (line) { // lineがNULLでない場合のみ処理する
-        width = ft_strlen(line);
-        height++;
-        free(line);
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		ft_exit_error("Error\nFailed to open file");
+	width = 0;
+	height = 0;
+	// 最初の行を読み込む
+	line = get_next_line(fd);
+	if (line) { // lineがNULLでない場合のみ処理する
+		width = ft_strlen(line);
+		height++;
+		free(line);
 
-        // 2行目以降を読み込む
-        while ((line = get_next_line(fd)) != NULL) {
-            if (width < (int)ft_strlen(line))
-                width = ft_strlen(line);
-            height++;
-            free(line);
-        }
-    }
-    game->wid = width;
-    game->hei = height;
-    game->all_str = (char **)ft_calloc(sizeof(char *), height);
-    close(fd);
+		// 2行目以降を読み込む
+		while ((line = get_next_line(fd)) != NULL) {
+			if (width < (int)ft_strlen(line))
+				width = ft_strlen(line);
+			height++;
+			free(line);
+		}
+	}
+	game->wid = width;
+	game->hei = height;
+	game->all_str = (char **)ft_calloc(sizeof(char *), height);
+	close(fd);
 }
 
 //マップが1に囲まれているかを確認する
@@ -117,17 +117,72 @@ void	map_check(t_game game)
 	}
 }
 
-//mapのもじれつが来るまでの文字列を取り出す
-void	get_map_str(char *filename, t_game *game)
-{
-	size_t	map_hei;
-	size_t	i;
-
-	while (i)
-}
-
 //mapの文字列だけを取り出す
-void	
+void	store_map(t_game *game)
+{
+	size_t	i;
+	size_t	j;
+	size_t	height;
+	int		count;
+	int		flag;
+
+	i = 0;
+	count = 0;
+	flag = 0;
+	height = game->hei;
+	while (i < game->hei)
+	{
+		if (game->all_str[i][0])
+		{
+			if (game->all_str[i][0] != ' ' && game->all_str[i][0] != '1'
+				&& game->all_str[i][0] != '0')
+			{
+				count++;
+				i++;
+			}
+			if (game->all_str[i][0] == ' ' || game->all_str[i][0] == '1'
+				|| game->all_str[i][0] == '0')
+			{
+				flag = 1;
+				j = 0;
+				while (game->all_str[i][j])
+				{
+					if (game->all_str[i][j] != ' ' && game->all_str[i][j] != '1'
+					&& game->all_str[i][j] != '0' && game->all_str[i][j] != 'N'
+					&& game->all_str[i][j] != 'S' && game->all_str[i][j] != 'E'
+					&& game->all_str[i][j] != 'W' && game->all_str[i][j] != '\n')
+					{
+						ft_exit_error("Error\ndInvalid map");
+					}
+					j++;
+				}
+				i++;
+			}
+		}
+	}
+	if (flag == 1)
+	{
+		game->map_str = (char **)ft_calloc(sizeof(char *), height - count + 1);
+		if (!game->map_str)
+			ft_exit_error("Error\nFailed to allocate memory");
+		i = 0;
+		j = 0;
+		game->hei2 = height - count;
+		while (i < height)
+		{
+			if (game->all_str[i][0] == ' ' || game->all_str[i][0] == '1'
+				|| game->all_str[i][0] == '0')
+			{
+				game->map_str[j] = ft_strdup(game->all_str[i]);
+				j++;
+			}
+			i++;
+		}
+		game->map_str[j] = NULL;
+	}
+	else
+		ft_exit_error("Error\nInvalid map");
+}
 
 //マップの文字列を読み込む
 //この際、マップの情報は2次配列で保存する
@@ -138,7 +193,6 @@ void	map_load(char *filename, t_game *game)
 	size_t		i;
 
 	fd = open(filename, O_RDONLY);
-	printf("map load\n");
 	get_map_size(filename, game);
 	if (fd < 0)
 		ft_exit_error("Error\nFailed to open file");
@@ -153,15 +207,9 @@ void	map_load(char *filename, t_game *game)
 		free(line);
 		i++;
 	}
-	printf("map load 2\n");
 	print_map(game);
 	split_line(game);
-	printf("game->no_str: %s\n", game->no_str);
-	printf("game->so_str: %s\n", game->so_str);
-	printf("game->we_str: %s\n", game->we_str);
-	printf("game->ea_str: %s\n", game->ea_str);
-	printf("game->height: %zu\n", game->hei);
-	printf("game->width: %zu\n", game->wid);
+	store_map(game);
 	close(fd);
 }
 
@@ -170,8 +218,10 @@ void	map_word_check(t_game *game)
 	size_t	i;
 	size_t	j;
 
+	if (!game->map_str)
+		ft_exit_error("Error\nMap not initialized");
 	i = 0;
-	while(i < game->hei)
+	while(i < game->hei2)
 	{
 		j = 0;
 		while(game->map_str[i][j])
