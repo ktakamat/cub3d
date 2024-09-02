@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktakamat <ktakamat@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:12:07 by ktakamat          #+#    #+#             */
-/*   Updated: 2024/08/31 19:53:34 by ktakamat         ###   ########.fr       */
+/*   Updated: 2024/09/02 15:49:29 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef struct s_game
 	t_mlx	mlx;
 	t_img	img;
 	size_t	hei;
-	size_t	hei2;
+	size_t	hei_map;
 	size_t	wid;
 	void	*mx;
 	void	*win;
@@ -85,6 +85,7 @@ typedef struct s_game
 	int		yi;
 	int		error_item;
 	int		player_count;
+	t_stack	*player;
 	bool	running;
 }	t_game;
 
@@ -123,5 +124,9 @@ void	store_map(t_game *game);
 
 //debug.c
 void	print_map(t_game *game);
+void    print_map_str(t_game *game);
+
+//map_check.c
+void	surround_wall(t_game *game);
 
 #endif

@@ -2,6 +2,7 @@ NAME = cub3D
 SRCS = srcs/main.c srcs/map.c srcs/utlis.c\
 	srcs/map_read.c \
 	srcs/debug.c \
+	srcs/map_check.c \
 	libft/ft_get_next_line/get_next_line.c
 OBJS = $(SRCS:.c=.o)
 CC = gcc
