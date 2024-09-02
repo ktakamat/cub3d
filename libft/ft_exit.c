@@ -6,14 +6,14 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 20:06:52 by ktakamat          #+#    #+#             */
-/*   Updated: 2024/08/29 21:03:39 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/02 19:12:48 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// void	ft_exit(void)
-// {
-// 	ft_printf("Error\n");
-// 	exit(EXIT_FAILURE);
-// }
+void	ft_exit(void)
+{
+	ft_printf("Error\n");
+	exit(EXIT_FAILURE);
+}
