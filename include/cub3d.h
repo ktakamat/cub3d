@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
+/*   By: machi <machi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:12:07 by ktakamat          #+#    #+#             */
-/*   Updated: 2024/09/02 15:49:29 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/04 17:18:49 by machi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,30 @@ typedef struct s_game
 	bool	running;
 }	t_game;
 
+typedef struct s_ray
+{
+	double	camera_x;
+	
+	int		map_x;
+	int		map_y;
+	
+
+	double	side_dist_x;
+	double	side_dist_y;
+	double	perp_wall_dist; //このメンバーは、カメラの方向に対して壁までの距離を表す
+	int		side;
+	int		step_x;
+	int		step_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	t_img	*img;
+}	t_ray;
+
+typedef struct s_wall
+{
+	
+}	t_wall;
+
 typedef struct s_ma
 {
 	void		*mlx;
@@ -116,11 +140,15 @@ void	ft_exit_error(const char *str);
 void	init_game(t_game *game);
 void	get_map_size(char *filename, t_game *game);
 void	map_load(char *filename, t_game *game);
-void	map_word_check(t_game *game);
-void	split_line(t_game *game);
 void	get_map_size(char *filename, t_game *game);
-void	map_check(t_game game);
+
+//map_error.c
+void	map_word_check(t_game *game);
+
+//split_line.c
+void	split_line(t_game *game);
 void	store_map(t_game *game);
+
 
 //debug.c
 void	print_map(t_game *game);

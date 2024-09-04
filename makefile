@@ -5,6 +5,8 @@ SRCS = srcs/main.c \
 	srcs/map_read.c \
 	srcs/debug.c \
 	srcs/map_check.c \
+	srcs/map_error.c \
+	srcs/split_line.c \
 	libft/ft_get_next_line/get_next_line.c
 OBJS = $(SRCS:.c=.o)
 CC = gcc

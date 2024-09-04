@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_read.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
+/*   By: machi <machi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 21:36:40 by apple             #+#    #+#             */
-/*   Updated: 2024/09/02 15:47:48 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/04 14:01:13 by machi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,33 +22,6 @@ void	init_game(t_game *game)
 	if (!map_str)
 		ft_exit_error("Error\nFailed to allocate memory");
 	game->map_str = map_str;
-}
-
-void	split_line(t_game *game)
-{
-	size_t	i;
-	
-	i = 0;
-	while (i < game->hei)
-	{
-		if (game->all_str[i][0])
-		{
-			if (ft_strncmp(game->all_str[i], "NO", 2) == 0)
-				game->no_str = ft_strdup(game->all_str[i]);
-			if (ft_strncmp(game->all_str[i], "SO", 2) == 0)
-				game->so_str = ft_strdup(game->all_str[i]);
-			if (ft_strncmp(game->all_str[i], "WE", 2) == 0)
-				game->we_str = ft_strdup(game->all_str[i]);
-			if (ft_strncmp(game->all_str[i], "EA", 2) == 0)
-				game->ea_str = ft_strdup(game->all_str[i]);
-			if (ft_strncmp(game->all_str[i], "F", 1) == 0)
-				game->f_str = ft_strdup(game->all_str[i]);
-			if (ft_strncmp(game->all_str[i], "C", 1) == 0)
-				game->c_str = ft_strdup(game->all_str[i]);
-			
-		}
-		i++;
-	}
 }
 
 //にじ配列の幅と高さを取得する
@@ -117,73 +90,6 @@ void	map_check(t_game game)
 	}
 }
 
-//mapの文字列だけを取り出す
-void	store_map(t_game *game)
-{
-	size_t	i;
-	size_t	j;
-	size_t	height;
-	int		count;
-	int		flag;
-
-	i = 0;
-	count = 0;
-	flag = 0;
-	height = game->hei;
-	while (i < game->hei)
-	{
-		if (game->all_str[i][0])
-		{
-			if (game->all_str[i][0] != ' ' && game->all_str[i][0] != '1'
-				&& game->all_str[i][0] != '0')
-			{
-				count++;
-				i++;
-			}
-			if (game->all_str[i][0] == ' ' || game->all_str[i][0] == '1'
-				|| game->all_str[i][0] == '0')
-			{
-				flag = 1;
-				j = 0;
-				while (game->all_str[i][j])
-				{
-					if (game->all_str[i][j] != ' ' && game->all_str[i][j] != '1'
-					&& game->all_str[i][j] != '0' && game->all_str[i][j] != 'N'
-					&& game->all_str[i][j] != 'S' && game->all_str[i][j] != 'E'
-					&& game->all_str[i][j] != 'W' && game->all_str[i][j] != '\n')
-					{
-						ft_exit_error("Error\ndInvalid map");
-					}
-					j++;
-				}
-				i++;
-			}
-		}
-	}
-	if (flag == 1)
-	{
-		game->map_str = (char **)ft_calloc(sizeof(char *), height - count + 1);
-		if (!game->map_str)
-			ft_exit_error("Error\nFailed to allocate memory");
-		i = 0;
-		j = 0;
-		game->hei_map = height - count;
-		while (i < height)
-		{
-			if (game->all_str[i][0] == ' ' || game->all_str[i][0] == '1'
-				|| game->all_str[i][0] == '0')
-			{
-				game->map_str[j] = ft_strdup(game->all_str[i]);
-				j++;
-			}
-			i++;
-		}
-		game->map_str[j] = NULL;
-	}
-	else
-		ft_exit_error("Error\nInvalid map");
-}
-
 //マップの文字列を読み込む
 //この際、マップの情報は2次配列で保存する
 void	map_load(char *filename, t_game *game)
@@ -211,40 +117,4 @@ void	map_load(char *filename, t_game *game)
 	split_line(game);
 	store_map(game);
 	close(fd);
-}
-
-void	map_word_check(t_game *game)
-{
-	size_t	i;
-	size_t	j;
-
-	if (!game->map_str)
-		ft_exit_error("Error\nMap not initialized");
-	i = 0;
-	while(i < game->hei_map)
-	{
-		j = 0;
-		while(game->map_str[i][j])
-		{
-			if (game->map_str[i][j] != 'N' && game->map_str[i][j] != 'S' 
-				&& game->map_str[i][j] != 'E' && game->map_str[i][j] != 'W'
-				&& game->map_str[i][j] != '0' && game->map_str[i][j] != '1'
-				&& game->map_str[i][j] != ' ' && game->map_str[i][j] != '\n')
-				ft_exit_error("Error\nFailed to read file");
-			if (game->map_str[i][j] == 'N' || game->map_str[i][j] == 'S' 
-				|| game->map_str[i][j] == 'E' || game->map_str[i][j] == 'W')
-				{
-					game->player_count++;
-					game->player = (t_stack *)ft_calloc(sizeof(t_stack), 1);
-					if (!game->player)
-						ft_exit_error("Error\nFailed to allocate memory");
-					game->player->x = j;
-					game->player->y = i;
-				}
-			j++;
-		}
-		i++;
-	}
-	if (game->player_count != 1)
-		ft_exit_error("Error\nInvalid number of players");
 }
