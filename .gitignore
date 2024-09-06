@@ -1,5 +1,5 @@
 srcs/*.o
 srcs/*.d
+srcs/test.c
 libft/*.o
 cub3D
-test.c
