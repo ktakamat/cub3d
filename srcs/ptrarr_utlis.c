@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ptrarr_utlis.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/29 17:40:52 by ktakamat          #+#    #+#             */
-/*   Updated: 2024/09/06 19:27:09 by apple            ###   ########.fr       */
+/*   Created: 2024/09/06 21:46:21 by apple             #+#    #+#             */
+/*   Updated: 2024/09/06 21:48:24 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	ft_cub3d(int argc, char **argv)
+void	ptrarr_free(void **ptrarr)
 {
-	t_game	*game;
+	size_t	i;
 
-	game = (t_game *)ft_calloc(sizeof(t_game), 1);
-	init_game(game);
-	map_load(argv[1], game);
-	map_word_check(game);
-	set_player(game);
-	surround_wall(game);
-	print_game(game);
-}
-
-int	main(int argc, char **argv)
-{
-	if (argc < 2 || argc > 3)
-		ft_exit_error("Error\nInvalid number of arguments");
-	ft_cub3d(argc, argv);
+	i = 0;
+	while (ptrarr[i])
+	{
+		free(ptrarr[i])
+		ptrarr[i] = NULL;
+		i++;
+	}
+	free(ptrarr);
 }
