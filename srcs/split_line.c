@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: machi <machi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 12:59:19 by machi             #+#    #+#             */
-/*   Updated: 2024/09/04 13:00:32 by machi            ###   ########.fr       */
+/*   Updated: 2024/09/06 19:29:50 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,18 @@ void	split_line(t_game *game)
 	{
 		if (game->all_str[i][0])
 		{
-			if (ft_strncmp(game->all_str[i], "NO", 2) == 0)
-				game->no_str = ft_strdup(game->all_str[i]);
-			if (ft_strncmp(game->all_str[i], "SO", 2) == 0)
-				game->so_str = ft_strdup(game->all_str[i]);
-			if (ft_strncmp(game->all_str[i], "WE", 2) == 0)
-				game->we_str = ft_strdup(game->all_str[i]);
-			if (ft_strncmp(game->all_str[i], "EA", 2) == 0)
-				game->ea_str = ft_strdup(game->all_str[i]);
-			if (ft_strncmp(game->all_str[i], "F", 1) == 0)
-				game->f_str = ft_strdup(game->all_str[i]);
-			if (ft_strncmp(game->all_str[i], "C", 1) == 0)
-				game->c_str = ft_strdup(game->all_str[i]);
-			
+			if (ft_strncmp(game->all_str[i], "NO ", 3) == 0)
+				game->no_str = ft_strdup(game->all_str[i] + 3);
+			if (ft_strncmp(game->all_str[i], "SO ", 3) == 0)
+				game->so_str = ft_strdup(game->all_str[i] + 3);
+			if (ft_strncmp(game->all_str[i], "WE ", 3) == 0)
+				game->we_str = ft_strdup(game->all_str[i] + 3);
+			if (ft_strncmp(game->all_str[i], "EA ", 3) == 0)
+				game->ea_str = ft_strdup(game->all_str[i] + 3);
+			if (ft_strncmp(game->all_str[i], "F ", 2) == 0)
+				game->f_str = ft_strdup(game->all_str[i] + 2);
+			if (ft_strncmp(game->all_str[i], "C ", 2) == 0)
+				game->c_str = ft_strdup(game->all_str[i] + 2);
 		}
 		i++;
 	}
@@ -89,7 +88,7 @@ void	store_map(t_game *game)
 			ft_exit_error("Error\nFailed to allocate memory");
 		i = 0;
 		j = 0;
-		game->hei_map = height - count;
+		game->hei = height - count;
 		while (i < height)
 		{
 			if (game->all_str[i][0] == ' ' || game->all_str[i][0] == '1'
@@ -105,4 +104,3 @@ void	store_map(t_game *game)
 	else
 		ft_exit_error("Error\nInvalid map");
 }
-

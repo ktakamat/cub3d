@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: machi <machi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 13:01:12 by machi             #+#    #+#             */
-/*   Updated: 2024/09/04 13:08:48 by machi            ###   ########.fr       */
+/*   Updated: 2024/09/06 19:14:09 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	map_word_check(t_game *game)
 	if (!game->map_str)
 		ft_exit_error("Error\nMap not initialized");
 	i = 0;
-	while(i < game->hei_map)
+	while(i < game->hei)
 	{
 		j = 0;
 		while(game->map_str[i][j])
@@ -34,11 +34,8 @@ void	map_word_check(t_game *game)
 				|| game->map_str[i][j] == 'E' || game->map_str[i][j] == 'W')
 				{
 					game->player_count++;
-					game->player = (t_stack *)ft_calloc(sizeof(t_stack), 1);
-					if (!game->player)
-						ft_exit_error("Error\nFailed to allocate memory");
-					game->player->x = j;
-					game->player->y = i;
+					game->player.x = j;
+					game->player.y = i;
 				}
 			j++;
 		}
