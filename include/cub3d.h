@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:12:07 by ktakamat          #+#    #+#             */
-/*   Updated: 2024/09/06 22:04:52 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/09 16:38:45 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@
 # define KEY_S 1
 # define KEY_D 2
 
-# define MAP_WINDTH 680
-# define MAP_HEIGHT 480
+# define SCREEN_WIDTH 680
+# define SCREEN_HEIGHT 480
 # define ERROR 1
 # define FOV 66
 
@@ -80,11 +80,13 @@ typedef struct s_img
 	int		endian;
 	int		wid;
 	int		hei;
+	int		bits_per_pixel;
 }	t_img;
 
 typedef struct s_game
 {
-	t_mlx		*mlx;
+	void		*mlx;
+	void		*win;//windows
 	t_img		img;
 	size_t		hei;
 	size_t		wid;
@@ -99,6 +101,10 @@ typedef struct s_game
 	char		*f_str;
 	char		*c_str;
 	char		**map_str;
+	int			tex_wid;
+	int			tex_hei;
+	double		height_base; //距離によって壁の高さを変えるための基準
+	double		*dist_buffer;
 	//playerの設定 pos,dir,plane
 	t_player	player;
 	t_img		no_tex;
@@ -143,7 +149,14 @@ typedef struct s_ray_data
 
 typedef struct s_wall
 {
-	
+	int		line_hei;
+	int		draw_start;
+	int		draw_end;
+	double	wall_x;
+	int		texture_x;
+	double	step;
+	double	texture_pos_y;
+	int		texture_y;
 }	t_wall;
 
 typedef struct s_ma
@@ -166,6 +179,7 @@ typedef struct s_last
 //math.c
 double	change_pi(double x);
 size_t	c_str_count(char *str, char c);
+double	vec_len(t_vec2 vec);
 
 //map.c
 void	map_read(char *filename, t_game *game);
@@ -187,6 +201,9 @@ void	map_load(char *filename, t_game *game);
 //map_error.c
 void	map_word_check(t_game *game);
 
+//map_color.c
+int	set_color(t_game *game);
+
 //split_line.c
 void	split_line(t_game *game);
 void	store_map(t_game *game);
@@ -195,9 +212,22 @@ void	store_map(t_game *game);
 void	print_map(t_game *game);
 void    print_map_str(t_game *game);
 void	print_game(t_game *game);
+void	print_rgb(char **rgb);
+
 
 //map_check.c
 void	surround_wall(t_game *game);
+
+//ptrarr_utlis.c
+void	ptrarr_free(void **ptrarr);
+
+//create_window.c
+int	create_window(t_game *game);
+
+//set_color.c
+uint32_t	get_color_f(t_game *game, uint32_t *color);
+uint32_t	get_color_c(t_game *game, uint32_t *color);
+bool	color_set_check(t_game *game);
 
 //ptrarr_utlis.c
 void	ptrarr_free(void **ptrarr);

@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 17:06:25 by apple             #+#    #+#             */
-/*   Updated: 2024/09/06 19:21:12 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/08 17:17:16 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,35 @@ void	set_player(t_game *game)
 void	set_game_tex(t_game *game)
 {
 	game->no_tex.img = mlx_xpm_file_to_image(game->mlx, game->no_str, &game->no_tex.wid, &game->no_tex.hei);
+	if (!game->no_tex.img)
+		ft_exit_error("Error\nFailed to set texture");
+
 	game->so_tex.img = mlx_xpm_file_to_image(game->mlx, game->so_str, &game->so_tex.wid, &game->so_tex.hei);
+	if (!game->so_tex.img)
+		ft_exit_error("Error\nFailed to set texture");
+
 	game->we_tex.img = mlx_xpm_file_to_image(game->mlx, game->we_str, &game->we_tex.wid, &game->we_tex.hei);
+	if (!game->we_tex.img)
+		ft_exit_error("Error\nFailed to set texture");
+
 	game->ea_tex.img = mlx_xpm_file_to_image(game->mlx, game->ea_str, &game->ea_tex.wid, &game->ea_tex.hei);
+	if (!game->ea_tex.img)
+		ft_exit_error("Error\nFailed to set texture");
+
+
+	game->no_tex.addr = mlx_get_data_addr(game->no_tex.img, &game->no_tex.bits_per_pixel, &game->no_tex.line_len, &game->no_tex.endian);
+	if (!game->no_tex.addr)
+		ft_exit_error("Error\nFailed to set texture");
+
+	game->so_tex.addr = mlx_get_data_addr(game->so_tex.img, &game->so_tex.bits_per_pixel, &game->so_tex.line_len, &game->so_tex.endian);
+	if (!game->so_tex.addr)
+		ft_exit_error("Error\nFailed to set texture");
+
+	game->we_tex.addr = mlx_get_data_addr(game->we_tex.img, &game->we_tex.bits_per_pixel, &game->we_tex.line_len, &game->we_tex.endian);
+	if (!game->we_tex.addr)
+		ft_exit_error("Error\nFailed to set texture");
+	
+	game->ea_tex.addr = mlx_get_data_addr(game->ea_tex.img, &game->ea_tex.bits_per_pixel, &game->ea_tex.line_len, &game->ea_tex.endian);
+	if (!game->ea_tex.addr)
+		ft_exit_error("Error\nFailed to set texture");
 }

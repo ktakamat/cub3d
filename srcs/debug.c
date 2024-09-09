@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 15:15:52 by apple             #+#    #+#             */
-/*   Updated: 2024/09/06 19:40:28 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/08 18:44:50 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,11 @@ void    print_game(t_game *game)
 	printf("we_tex: %p\n", game->we_tex.img);
 	printf("ea_tex: %p\n", game->ea_tex.img);
 	printf("running: %d\n", game->running);
+}
+
+void	print_rgb(char **rgb)
+{
+	printf("R: %s\n", rgb[0]);
+	printf("G: %s\n", rgb[1]);
+	printf("B: %s\n", rgb[2]);
 }

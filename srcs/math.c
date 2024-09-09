@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 16:05:52 by apple             #+#    #+#             */
-/*   Updated: 2024/09/06 19:01:58 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/08 18:25:32 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,9 @@ size_t	c_str_count(char *str, char c)
 		i++;
 	}
 	return (count);
+}
+
+double	vec_len(t_vec2 vec)
+{
+	return (sqrt(vec.x * vec.x + vec.y * vec.y));
 }

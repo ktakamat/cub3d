@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 21:03:54 by apple             #+#    #+#             */
-/*   Updated: 2024/09/06 19:44:38 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/09 20:25:26 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ bool	str_all_num(char *str)
 	while (str[i])
 	{
 		if (!(str[i] >= '0' && str[i] <= '9'))
+		{
 			return (false);
+		}
 		i++;
 	}
 	return (true);

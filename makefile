@@ -9,6 +9,9 @@ SRCS = srcs/main.c \
 	srcs/split_line.c \
 	srcs/math.c \
 	srcs/init_set.c \
+	srcs/create_window.c \
+	srcs/map_color.c \
+	srcs/ptrarr_utlis.c \
 	libft/ft_get_next_line/get_next_line.c
 OBJS = $(SRCS:.c=.o)
 CC = gcc

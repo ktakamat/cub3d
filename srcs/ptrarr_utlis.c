@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 21:46:21 by apple             #+#    #+#             */
-/*   Updated: 2024/09/06 21:48:24 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/08 18:54:58 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ptrarr_free(void **ptrarr)
 	i = 0;
 	while (ptrarr[i])
 	{
-		free(ptrarr[i])
+		free(ptrarr[i]);
 		ptrarr[i] = NULL;
 		i++;
 	}
