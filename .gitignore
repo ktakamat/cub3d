@@ -4,3 +4,4 @@ srcs/test.c
 libft/*.o
 libft/ft_get_next_line/*.o
 cub3D
+a.out

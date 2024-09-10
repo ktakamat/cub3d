@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:12:07 by ktakamat          #+#    #+#             */
-/*   Updated: 2024/09/09 16:38:45 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/10 15:51:54 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ typedef struct s_img
 {
 	void	*img;
 	char	*addr;
-	int		bpp;
 	int		line_len;
 	int		endian;
 	int		wid;
@@ -131,8 +130,7 @@ typedef struct s_ray
 	int		step_y;
 	double	delta_dist_x;//画面に映る壁との距離
 	double	delta_dist_y;//
-	char	*tex;
-	t_img	*img;
+	t_img	*tex;
 }	t_ray;
 
 typedef struct s_ray_data

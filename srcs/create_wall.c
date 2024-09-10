@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:21:15 by machi             #+#    #+#             */
-/*   Updated: 2024/09/09 16:46:56 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/10 20:01:07 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,20 @@ void	simulate_ray(t_game *game, t_ray *ray)
 	else
 		ray->perp_wall_dist = (ray->map_y - game->player.pos.y + (1 - ray->step_y) / 2) / ray->dir.y;
 	//game->we_strをあとで変更する
-	if (ray->side == 0)
-		ray->tex = (ray->step_x > 0) ? &game->we_str : &game->ea_str;
-	else
-		ray->tex = (ray->step_y > 0) ? &game->so_str : &game->no_str;
+	// if (ray->side == 0)
+	// 	ray->tex = (ray->step_x > 0) ? &game->we_str : &game->ea_str;
+	// else
+	// 	ray->tex = (ray->step_y > 0) ? &game->so_str : &game->no_str;
 }
 
-void	wall_vis(t_game *game, t_ray *ray, t_wall *wall_vis)
+void	wall_vis(t_game *game, t_ray ray, t_wall *wall_vis)
 {
 	//高さの基本ベースから距離によっての壁の高さを決める
-	wall_vis->line_hei = (int)(game->height_base / ray->perp_wall_dist);
+	wall_vis->line_hei = (int)(game->height_base / ray.perp_wall_dist);
 	wall_vis->draw_start = -wall_vis->line_hei / 2 + SCREEN_HEIGHT / 2;
 	if (wall_vis->draw_start < 0)
 		wall_vis->draw_start = 0;
-	wall->draw_end = wall_vis->line_height / 2 + SCREEN_HEIGHT / 2;
+	wall_vis->draw_end = wall_vis->line_hei / 2 + SCREEN_HEIGHT / 2;
 	if (wall_vis->draw_end >= SCREEN_HEIGHT)
 		wall_vis->draw_end = SCREEN_HEIGHT - 1;
 	//ifのどこの側面に光線があたったかyかx
@@ -72,15 +72,49 @@ void	wall_vis(t_game *game, t_ray *ray, t_wall *wall_vis)
 	else
 		wall_vis->wall_x = game->player.pos.x + ray.perp_wall_dist * ray.dir.x;
 	wall_vis->wall_x -= floor(wall_vis->wall_x);
-	wall_vis->texture_z = (int)(wall_vis->wall_x);
+	wall_vis->texture_x = (int)(wall_vis->wall_x);
 	if ((ray.side == 0 && ray.dir.x < 0) || (ray.side == 1 && ray.dir.y > 0))
-		wall_vis->texture_x = ray.tex->width - wall_vis->texture_x - 1;
-	wall_vis->step = 1.0 * ray.tex->height / (double)wall_vis->line_hei;
+		wall_vis->texture_x = ray.tex->wid - wall_vis->texture_x - 1;
+	wall_vis->step = 1.0 * ray.tex->hei / (double)wall_vis->line_hei;
+}
+
+void		my_mlx_pixel_put(t_img *img, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = img->addr + (y * img->line_len +
+		x * (img->bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
 }
 
 static void	draw_per_line(t_game *game, t_ray ray, t_wall *wall_vis,
 			int x)
+{
+	int			y;
+	uint32_t	color;
 
+	wall_vis->texture_pos_y = (wall_vis->draw_start - SCREEN_HEIGHT / 2
+		+ wall_vis->line_hei / 2) * wall_vis->step;
+	y = 0;
+	while (y < SCREEN_HEIGHT)
+	{
+		if (y <= SCREEN_HEIGHT / 2)
+			my_mlx_pixel_put(&(game->img), x, y, game->sky_color);
+		else
+			my_mlx_pixel_put(&(game->img), x, y, game->ground_color);
+		if (y >= wall_vis->draw_start && y < wall_vis->draw_end)
+		{
+			wall_vis->texture_y = (int)wall_vis->texture_pos_y;
+			if (wall_vis->texture_y >= ray.tex->hei)
+				wall_vis->texture_y = ray.tex->hei - 1;
+			wall_vis->texture_pos_y += wall_vis->step;
+			color = get_color(*ray.tex, wall_vis->texture_x,
+				wall_vis->texture_y);
+			my_mlx_pixel_put(&(game->img), x, y, color);
+		}
+		y++;
+	}
+}
 
 void	create_wall(t_game *game)
 {
@@ -94,7 +128,8 @@ void	create_wall(t_game *game)
 		initialized_ray(game, &ray, x);
 		simulate_ray(game, &ray);
 		game->dist_buffer[x] = ray.perp_wall_dist;
-		wall_vis(game, ray, &wall, x);
-		
+		wall_vis(game, ray, &wall);
+		draw_per_line(game, ray, &wall_vis, x);
+		x++;
 	}
 }

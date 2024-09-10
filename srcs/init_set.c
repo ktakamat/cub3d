@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 17:06:25 by apple             #+#    #+#             */
-/*   Updated: 2024/09/08 17:17:16 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/09 20:46:31 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ void	init_game(t_game *game)
 	game = (t_game *)ft_calloc(sizeof(t_game), 1);
 	if (!game)
 		ft_exit_error("Error\nFailed to allocate memory");
+	game->mlx = mlx_init();
+	if (!game->mlx)
+		ft_exit_error("Error\nFailed to initialize mlx");
 }
 
 void	set_player(t_game *game)
@@ -50,6 +53,10 @@ void	set_player(t_game *game)
 
 void	set_game_tex(t_game *game)
 {
+
+	printf("no tex = [%s]\n", game->no_str);
+	game->no_str = ft_strdup("../textures/N.xpm");
+	printf("no tex = [%s]\n", game->no_str);
 	game->no_tex.img = mlx_xpm_file_to_image(game->mlx, game->no_str, &game->no_tex.wid, &game->no_tex.hei);
 	if (!game->no_tex.img)
 		ft_exit_error("Error\nFailed to set texture");
@@ -66,6 +73,7 @@ void	set_game_tex(t_game *game)
 	if (!game->ea_tex.img)
 		ft_exit_error("Error\nFailed to set texture");
 
+	printf("no_tex.wid = [%d]\n", game->no_tex.wid);
 
 	game->no_tex.addr = mlx_get_data_addr(game->no_tex.img, &game->no_tex.bits_per_pixel, &game->no_tex.line_len, &game->no_tex.endian);
 	if (!game->no_tex.addr)

@@ -12,6 +12,7 @@ SRCS = srcs/main.c \
 	srcs/create_window.c \
 	srcs/map_color.c \
 	srcs/ptrarr_utlis.c \
+	srcs/create_wall.c \
 	libft/ft_get_next_line/get_next_line.c
 OBJS = $(SRCS:.c=.o)
 CC = gcc
