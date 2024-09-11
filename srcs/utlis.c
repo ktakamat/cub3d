@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 21:03:54 by apple             #+#    #+#             */
-/*   Updated: 2024/09/09 20:25:26 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/10 20:33:27 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,12 @@ bool	str_all_num(char *str)
 		i++;
 	}
 	return (true);
+}
+
+uint32_t	get_color(t_img img, int x, int y)
+{
+	char	*dst;
+
+	dst = img.addr + (y * img.line_len + x * (img.bits_per_pixel / 8));
+	return (*(unsigned int *)dst);
 }

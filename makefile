@@ -2,7 +2,7 @@
 NAME = cub3D
 SRCS = srcs/main.c \
 	srcs/utlis.c \
-	srcs/map_read.c \
+	srcs/map_load.c \
 	srcs/debug.c \
 	srcs/map_check.c \
 	srcs/map_error.c \

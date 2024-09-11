@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:12:07 by ktakamat          #+#    #+#             */
-/*   Updated: 2024/09/10 15:51:54 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/11 14:06:57 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,7 @@ void	set_game_tex(t_game *game);
 void	ft_exit_error(const char *str);
 int		split_size(char *str, char c);
 bool	str_all_num(char *str);
+uint32_t	get_color(t_img img, int x, int y);
 
 //map_read.c
 void	get_map_size(char *filename, t_game *game);

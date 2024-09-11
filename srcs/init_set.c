@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 17:06:25 by apple             #+#    #+#             */
-/*   Updated: 2024/09/09 20:46:31 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/11 14:21:14 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	init_game(t_game *game)
 {
 	char 	**map_str;
 
-	game = (t_game *)ft_calloc(sizeof(t_game), 1);
+	// game = (t_game *x)ft_calloc(sizeof(t_game), 1);
 	if (!game)
 		ft_exit_error("Error\nFailed to allocate memory");
 	game->mlx = mlx_init();
@@ -54,24 +54,24 @@ void	set_player(t_game *game)
 void	set_game_tex(t_game *game)
 {
 
-	printf("no tex = [%s]\n", game->no_str);
-	game->no_str = ft_strdup("../textures/N.xpm");
-	printf("no tex = [%s]\n", game->no_str);
+	printf("1 no tex = [%s]\n", game->no_str);
+	// game->no_str = ft_strdup("./textures/N.xpm");
+	printf("2 no tex = [%s]\n", game->no_str);
 	game->no_tex.img = mlx_xpm_file_to_image(game->mlx, game->no_str, &game->no_tex.wid, &game->no_tex.hei);
 	if (!game->no_tex.img)
-		ft_exit_error("Error\nFailed to set texture");
+		ft_exit_error("Error\nFailed to set texture 1");
 
 	game->so_tex.img = mlx_xpm_file_to_image(game->mlx, game->so_str, &game->so_tex.wid, &game->so_tex.hei);
 	if (!game->so_tex.img)
-		ft_exit_error("Error\nFailed to set texture");
+		ft_exit_error("Error\nFailed to set texture 2");
 
 	game->we_tex.img = mlx_xpm_file_to_image(game->mlx, game->we_str, &game->we_tex.wid, &game->we_tex.hei);
 	if (!game->we_tex.img)
-		ft_exit_error("Error\nFailed to set texture");
+		ft_exit_error("Error\nFailed to set texture 3");
 
 	game->ea_tex.img = mlx_xpm_file_to_image(game->mlx, game->ea_str, &game->ea_tex.wid, &game->ea_tex.hei);
 	if (!game->ea_tex.img)
-		ft_exit_error("Error\nFailed to set texture");
+		ft_exit_error("Error\nFailed to set texture 4");
 
 	printf("no_tex.wid = [%d]\n", game->no_tex.wid);
 

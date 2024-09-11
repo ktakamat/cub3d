@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:40:52 by ktakamat          #+#    #+#             */
-/*   Updated: 2024/09/08 18:24:09 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/11 14:02:50 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@ void	ft_cub3d(int argc, char **argv)
 
 	game = (t_game *)ft_calloc(sizeof(t_game), 1);
 	init_game(game);
+	if (game->mlx == NULL)
+		ft_exit_error("Error\nFailed to initialize mlx cub3D");
 	map_load(argv[1], game);
 	map_word_check(game);
+	set_game_tex(game);
 	set_player(game);
 	set_color(game);
-	set_game_tex(game);
 	surround_wall(game);
 	print_game(game);
 	if (create_window(game) == ERROR)

@@ -6,29 +6,52 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 12:59:19 by machi             #+#    #+#             */
-/*   Updated: 2024/09/09 16:55:47 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/11 14:20:21 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"\
 
+// ft_strdup 関数は、文字列をコピーする際に、元の文字列の末尾にある改行文字も含めてコピーしてしまうため、問題が発生しています。
+
+// この問題を解決するには、ft_strdup を使う代わりに、ft_strtrim 関数を使って改行文字を削除してからコピーする必要があります。ft_strtrim 関数は、指定された文字列から先頭と末尾の指定された文字を削除する関数です。
+
+// 修正後の split_line 関数は以下のようになります。
+
 void	split_line(t_game *game)
 {
 	size_t	i;
-	
+	char	*trim_str;
+
 	i = 0;
 	while (i < game->hei)
 	{
 		if (game->all_str[i][0])
 		{
 			if (ft_strncmp(game->all_str[i], "NO ", 3) == 0)
-				game->no_str = ft_strdup(game->all_str[i] + 3);
+			{
+				trim_str = ft_strtrim(game->all_str[i] + 3, "\n"); // 改行文字を削除
+				game->no_str = ft_strdup(trim_str);
+				free(trim_str); // trim_str を解放
+			}
 			if (ft_strncmp(game->all_str[i], "SO ", 3) == 0)
-				game->so_str = ft_strdup(game->all_str[i] + 3);
+			{
+				trim_str = ft_strtrim(game->all_str[i] + 3, "\n");
+				game->so_str = ft_strdup(trim_str);
+				free(trim_str);
+			}
 			if (ft_strncmp(game->all_str[i], "WE ", 3) == 0)
-				game->we_str = ft_strdup(game->all_str[i] + 3);
+			{
+				trim_str = ft_strtrim(game->all_str[i] + 3, "\n");
+				game->we_str = ft_strdup(trim_str);
+				free(trim_str);
+			}
 			if (ft_strncmp(game->all_str[i], "EA ", 3) == 0)
-				game->ea_str = ft_strdup(game->all_str[i] + 3);
+			{
+				trim_str = ft_strtrim(game->all_str[i] + 3, "\n");
+				game->ea_str = ft_strdup(trim_str);
+				free(trim_str);
+			}
 			if (ft_strncmp(game->all_str[i], "F ", 2) == 0)
 				game->f_str = ft_strdup(game->all_str[i] + 2);
 			if (ft_strncmp(game->all_str[i], "C ", 2) == 0)
@@ -37,6 +60,31 @@ void	split_line(t_game *game)
 		i++;
 	}
 }
+// void	split_line(t_game *game)
+// {
+// 	size_t	i;
+	
+// 	i = 0;
+// 	while (i < game->hei)
+// 	{
+// 		if (game->all_str[i][0])
+// 		{
+// 			if (ft_strncmp(game->all_str[i], "NO ", 3) == 0)
+// 				game->no_str = ft_strdup(game->all_str[i] + 3);
+// 			if (ft_strncmp(game->all_str[i], "SO ", 3) == 0)
+// 				game->so_str = ft_strdup(game->all_str[i] + 3);
+// 			if (ft_strncmp(game->all_str[i], "WE ", 3) == 0)
+// 				game->we_str = ft_strdup(game->all_str[i] + 3);
+// 			if (ft_strncmp(game->all_str[i], "EA ", 3) == 0)
+// 				game->ea_str = ft_strdup(game->all_str[i] + 3);
+// 			if (ft_strncmp(game->all_str[i], "F ", 2) == 0)
+// 				game->f_str = ft_strdup(game->all_str[i] + 2);
+// 			if (ft_strncmp(game->all_str[i], "C ", 2) == 0)
+// 				game->c_str = ft_strdup(game->all_str[i] + 2);
+// 		}
+// 		i++;
+// 	}
+// }
 
 //mapの文字列だけを取り出す
 void	store_map(t_game *game)
