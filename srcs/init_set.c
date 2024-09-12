@@ -6,11 +6,11 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 17:06:25 by apple             #+#    #+#             */
-/*   Updated: 2024/09/12 19:57:35 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/12 20:20:06 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../include/cub3d.h"
+#include "../include/cub3d.h"
 
 //初期化をするt_game
 void	init_game(t_game *game)
@@ -32,22 +32,26 @@ void	set_player(t_game *game)
 {
 	if (game->map_str[game->player.y][game->player.x] == 'N')
 	{
-		game->player.dir.x = -1;
+		game->player.dir.x = 0;
+		game->player.dir.y = -1;
 		game->player.plane.x = tan(change_pi(FOV / 2));
 	}
 	else if (game->map_str[game->player.y][game->player.x] == 'S')
 	{
-		game->player.dir.x = 1;
+		game->player.dir.x = 0;
+		game->player.dir.y = 1;
 		game->player.plane.x = -1 * tan(change_pi(FOV / 2));
 	}
 	else if (game->map_str[game->player.y][game->player.x] == 'E')
 	{
-		game->player.dir.y = 1;
+		game->player.dir.x = 1;
+		game->player.dir.y = 0;
 		game->player.plane.x = tan(change_pi(FOV / 2));
 	}
 	else if (game->map_str[game->player.y][game->player.x] == 'W')
 	{
-		game->player.dir.y = -1;
+		game->player.dir.x = -1;
+		game->player.dir.y = 0;
 		game->player.plane.x = -1 * tan(change_pi(FOV / 2));
 	}
 	game->player.pos.x = game->player.x + 0.5;

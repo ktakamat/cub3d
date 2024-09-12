@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:40:52 by ktakamat          #+#    #+#             */
-/*   Updated: 2024/09/12 19:23:53 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/12 20:17:52 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ void	ft_cub3d(int argc, char **argv)
 	set_game_tex(game);
 	create_wall(game);
 	
-	libmlx(game);
-	// mlx_put_image_to_window(game->mlx, game->win, game->img.img, 0, 0);
-	// mlx_loop(game->mlx);
-	// // mlx_hook(game->win, KeyPress, KeyPressMask, key_press_hook, &game);
-	// // mlx_hook(game->win, KeyRelease, KeyReleaseMask, key_release_hook, &game);
-	// // mlx_hook(game->win, ClientMessage, 1L << 17, exit_game, &game);
-	// // mlx_loop_hook(game->mlx, &main_loop, &game);
-	// mlx_loop(game->mlx);
+	// libmlx(game);
+	mlx_put_image_to_window(game->mlx, game->win, game->img.img, 0, 0);
+	mlx_loop(game->mlx);
+	// mlx_hook(game->win, KeyPress, KeyPressMask, key_press_hook, &game);
+	// mlx_hook(game->win, KeyRelease, KeyReleaseMask, key_release_hook, &game);
+	// mlx_hook(game->win, ClientMessage, 1L << 17, exit_game, &game);
+	// mlx_loop_hook(game->mlx, &main_loop, &game);
+	mlx_loop(game->mlx);
 	
 }
 
