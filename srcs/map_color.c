@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_color.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ktakamat <ktakamat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 18:35:31 by apple             #+#    #+#             */
-/*   Updated: 2024/09/11 14:19:37 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/12 14:53:442 by ktakamat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,8 @@ uint32_t	get_color_c(t_game *game, uint32_t *color)
 	// 	ptrarr_free((void**)rgb_c);
 	// 	return (ERROR);
 	// }
-	// *color = ft_atoi(rgb_c[0]) << 16 | ft_atoi(rgb_c[1] << 8 | ft_atoi(rgb_c[2]));
-	// free_ptrarr((void**)rgb_c);
+	*color = ft_atoi(rgb_c[0]) << 16 | ft_atoi(rgb_c[1]) << 8 | ft_atoi(rgb_c[2]);
+	ptrarr_free((void**)rgb_c);
 	return (0);
 }
 

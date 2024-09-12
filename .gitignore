@@ -3,5 +3,6 @@ srcs/*.d
 srcs/test.c
 libft/*.o
 libft/ft_get_next_line/*.o
+*.py
 cub3D
 a.out

@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 16:58:17 by apple             #+#    #+#             */
-/*   Updated: 2024/09/08 18:10:47 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/11 15:33:53 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	create_window(t_game *game)
 	game->img.img = mlx_new_image(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	game->img.addr = mlx_get_data_addr(game->img.img, &game->img.bits_per_pixel,
 		&game->img.line_len, &game->img.endian);
+	if (game->img.img == NULL)
+		ft_exit_error("Error\nimg Failed to initialize mlx img\n");
 	game->img.wid = SCREEN_WIDTH;
 	game->img.hei = SCREEN_HEIGHT;
 	game->tex_wid = game->no_tex.wid;

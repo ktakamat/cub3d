@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:21:15 by machi             #+#    #+#             */
-/*   Updated: 2024/09/10 20:01:07 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/12 18:40:01 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,14 @@
 void initialized_ray(t_game *game, t_ray *ray, int x)
 {
 	ray->camera_x = 2 * x / (double)SCREEN_WIDTH - 1;
-	ray->dir.x = game->player.x + game->player.plane.x * ray->camera_x; //
-	ray->dir.y = game->player.y + game->player.plane.y * ray->camera_x;
+	ray->dir.x = game->player.dir.x + game->player.plane.x * ray->camera_x;
+	ray->dir.y = game->player.dir.y + game->player.plane.y * ray->camera_x;
+	// printf("game->player.x: %d\n", game->player.x);
+	// printf("game->player.y: %d\n", game->player.y);
+	// printf("game->player.plane.x: %f\n", game->player.plane.x);
+	// printf("game->player.plane.y: %f\n", game->player.plane.y);
+	// printf("ray->camera_x: %f\n", ray->camera_x);
+	// printf("ray->dir.x: %f\n", ray->dir.x);
 	ray->map_x = (int)game->player.x;
 	ray->map_y = (int)game->player.y;
 	ray->delta_dist_x = (1 / ray->dir.x) < 0 ? -1 * (1 / ray->dir.x) : (1 / ray->dir.x);
@@ -49,10 +55,10 @@ void	simulate_ray(t_game *game, t_ray *ray)
 	else
 		ray->perp_wall_dist = (ray->map_y - game->player.pos.y + (1 - ray->step_y) / 2) / ray->dir.y;
 	//game->we_strをあとで変更する
-	// if (ray->side == 0)
-	// 	ray->tex = (ray->step_x > 0) ? &game->we_str : &game->ea_str;
-	// else
-	// 	ray->tex = (ray->step_y > 0) ? &game->so_str : &game->no_str;
+	if (ray->side == 0)
+		ray->tex = (ray->step_x > 0) ? &game->we_tex : &game->ea_tex;
+	else
+		ray->tex = (ray->step_y > 0) ? &game->so_tex : &game->no_tex;
 }
 
 void	wall_vis(t_game *game, t_ray ray, t_wall *wall_vis)
@@ -75,6 +81,8 @@ void	wall_vis(t_game *game, t_ray ray, t_wall *wall_vis)
 	wall_vis->texture_x = (int)(wall_vis->wall_x);
 	if ((ray.side == 0 && ray.dir.x < 0) || (ray.side == 1 && ray.dir.y > 0))
 		wall_vis->texture_x = ray.tex->wid - wall_vis->texture_x - 1;
+	if (ray.tex->hei == 0)
+		ft_exit_error("Error\nTexture height is 0");
 	wall_vis->step = 1.0 * ray.tex->hei / (double)wall_vis->line_hei;
 }
 
@@ -98,6 +106,9 @@ static void	draw_per_line(t_game *game, t_ray ray, t_wall *wall_vis,
 	y = 0;
 	while (y < SCREEN_HEIGHT)
 	{
+		//game->imgがNULLの場合はエラーを出力する
+		if (game->img.img == NULL)
+			ft_exit_error("Error\nimg Failed to initialize mlx cub3D");
 		if (y <= SCREEN_HEIGHT / 2)
 			my_mlx_pixel_put(&(game->img), x, y, game->sky_color);
 		else
@@ -123,13 +134,14 @@ void	create_wall(t_game *game)
 	t_wall	wall;
 
 	x = 0;
-	while (x < SCREEN_HEIGHT)
+	while (x < SCREEN_WIDTH)
 	{
 		initialized_ray(game, &ray, x);
 		simulate_ray(game, &ray);
 		game->dist_buffer[x] = ray.perp_wall_dist;
+		// printf("game->dist_buffer[%d]: %f\n", x, game->dist_buffer[x]);
 		wall_vis(game, ray, &wall);
-		draw_per_line(game, ray, &wall_vis, x);
+		draw_per_line(game, ray, &wall, x);
 		x++;
 	}
 }

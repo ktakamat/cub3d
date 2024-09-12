@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 13:01:12 by machi             #+#    #+#             */
-/*   Updated: 2024/09/06 19:14:09 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/12 19:56:13 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	map_word_check(t_game *game)
 	size_t	i;
 	size_t	j;
 
+	printf("2\n");
 	if (!game->map_str)
 		ft_exit_error("Error\nMap not initialized");
 	i = 0;
@@ -36,6 +37,8 @@ void	map_word_check(t_game *game)
 					game->player_count++;
 					game->player.x = j;
 					game->player.y = i;
+					printf("game->player.xddd = %d\n", game->player.x);
+					printf("game->player.y ddd= %d\n", game->player.y);
 				}
 			j++;
 		}

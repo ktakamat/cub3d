@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: machi <machi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 17:08:29 by machi             #+#    #+#             */
-/*   Updated: 2023/08/28 15:53:51 by machi            ###   ########.fr       */
+/*   Updated: 2024/09/12 17:45:33 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
 char	*read_file(int fd, char *save)
 {
@@ -80,6 +81,7 @@ char	*get_next_line(int fd)
 {
 	static char	*save;
 	char		*line;
+
 
 	if (fd < 0 || BUFFER_SIZE < 0)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:12:07 by ktakamat          #+#    #+#             */
-/*   Updated: 2024/09/11 14:06:57 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/12 19:57:36 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,7 +212,8 @@ void	print_map(t_game *game);
 void    print_map_str(t_game *game);
 void	print_game(t_game *game);
 void	print_rgb(char **rgb);
-
+void	libmlx(t_game *game);
+void	print_texture(t_game *game);
 
 //map_check.c
 void	surround_wall(t_game *game);
@@ -222,6 +223,9 @@ void	ptrarr_free(void **ptrarr);
 
 //create_window.c
 int	create_window(t_game *game);
+
+//create_wall.c
+void	create_wall(t_game *game);
 
 //set_color.c
 uint32_t	get_color_f(t_game *game, uint32_t *color);
