@@ -1,10 +1,11 @@
-NO ./textures/N.xpm
+NO ./textures/bluestone.xpm
 SO ./textures/S.xpm
-WE ./textures/W.xpm
+WE ./textures/colorstone.xpm
 EA ./textures/E.xpm
 
-F 112,112,112
-C 54,57,56
+F 220,100,0
+C 225,30,0
+
 
 
 

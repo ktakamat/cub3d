@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ktakamat <ktakamat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:40:52 by ktakamat          #+#    #+#             */
-/*   Updated: 2024/09/12 20:17:52 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/12 21:33:48 by ktakamat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ void	ft_cub3d(int argc, char **argv)
 	// print_game(game);
 	
 	
+	set_game_tex(game);
 	if (create_window(game) == ERROR)
 		ft_exit_error("Error\nFailed to create window");
-	set_game_tex(game);
 	create_wall(game);
 	
 	// libmlx(game);

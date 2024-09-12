@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_wall.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ktakamat <ktakamat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:21:15 by machi             #+#    #+#             */
-/*   Updated: 2024/09/12 20:04:10 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/12 22:25:59 by ktakamat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ void initialized_ray(t_game *game, t_ray *ray, int x)
 	ray->camera_x = 2 * x / (double)SCREEN_WIDTH - 1;
 	ray->dir.x = game->player.dir.x + game->player.plane.x * ray->camera_x;
 	ray->dir.y = game->player.dir.y + game->player.plane.y * ray->camera_x;
-	printf("game->player.x: %f\n", game->player.dir.x);
-	printf("game->player.y: %f\n", game->player.dir.y);
 	// printf("game->player.plane.x: %f\n", game->player.plane.x);
 	// printf("game->player.plane.y: %f\n", game->player.plane.y);
 	// printf("ray->camera_x: %f\n", ray->camera_x);
@@ -54,7 +52,6 @@ void	simulate_ray(t_game *game, t_ray *ray)
 		ray->perp_wall_dist = (ray->map_x - game->player.pos.x + (1 - ray->step_x) / 2) / ray->dir.x;
 	else
 		ray->perp_wall_dist = (ray->map_y - game->player.pos.y + (1 - ray->step_y) / 2) / ray->dir.y;
-	//game->we_strをあとで変更する
 	if (ray->side == 0)
 		ray->tex = (ray->step_x > 0) ? &game->we_tex : &game->ea_tex;
 	else
@@ -78,7 +75,7 @@ void	wall_vis(t_game *game, t_ray ray, t_wall *wall_vis)
 	else
 		wall_vis->wall_x = game->player.pos.x + ray.perp_wall_dist * ray.dir.x;
 	wall_vis->wall_x -= floor(wall_vis->wall_x);
-	wall_vis->texture_x = (int)(wall_vis->wall_x);
+	wall_vis->texture_x = (int)(wall_vis->wall_x * ray.tex->wid);
 	if ((ray.side == 0 && ray.dir.x < 0) || (ray.side == 1 && ray.dir.y > 0))
 		wall_vis->texture_x = ray.tex->wid - wall_vis->texture_x - 1;
 	if (ray.tex->hei == 0)
