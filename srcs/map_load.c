@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 21:36:40 by apple             #+#    #+#             */
-/*   Updated: 2024/09/12 17:47:58 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/13 17:12:57 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	map_load(char *filename, t_game *game)
 	char	*line;
 	size_t		i;
 
+	if (!have_ber(filename))
+		ft_exit_error("Error\nFailed to open file");
 	fd = open(filename, O_RDONLY);
 	get_map_size(filename, game);
 	if (fd < 0)

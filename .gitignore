@@ -1,6 +1,7 @@
 srcs/*.o
 srcs/*.d
 srcs/test.c
+srcs/test_event.c
 libft/*.o
 libft/ft_get_next_line/*.o
 *.py

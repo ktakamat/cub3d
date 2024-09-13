@@ -13,6 +13,9 @@ SRCS = srcs/main.c \
 	srcs/map_color.c \
 	srcs/ptrarr_utlis.c \
 	srcs/create_wall.c \
+	srcs/re_set_player.c \
+	srcs/mlx_hook.c \
+	srcs/error.c \
 	libft/ft_get_next_line/get_next_line.c
 OBJS = $(SRCS:.c=.o)
 CC = gcc

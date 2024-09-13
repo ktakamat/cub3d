@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:12:07 by ktakamat          #+#    #+#             */
-/*   Updated: 2024/09/12 20:17:51 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/13 17:15:11 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <limits.h>
 # include <fcntl.h>
 # include <math.h>
+# include <X11/X.h>
+# include <X11/Xlib.h>
 # include "../libmlx/mlx.h"
 # include "../libft/libft.h"
 # include "../libft/ft_get_next_line/get_next_line.h"
@@ -31,16 +33,23 @@
 
 # define X_EVENT_KEY_PRESS 2
 # define X_EVENT_KEY_RELEASE 3
-# define KEY_ESC 53
-# define KEY_W 13
-# define KEY_A 0
-# define KEY_S 1
-# define KEY_D 2
+# define KEY_ESC 65307
+# define KEY_W 119
+# define KEY_A 100
+# define KEY_S 115
+# define KEY_D 97
+# define KEY_LEFT 113
+# define KEY_RIGHT 101
+
+# define KeyPress 2
 
 # define SCREEN_WIDTH 680
 # define SCREEN_HEIGHT 480
 # define ERROR 1
 # define FOV 66
+
+# define PLAYER_HALF_ROTATE (M_PI / 300)
+# define FILE_EXTENSION ".cub"
 
 typedef struct s_stack{
 	int	x;
@@ -66,6 +75,9 @@ typedef struct s_player
 {
 	int		x;
 	int		y;
+	int		is_moving;
+	int		is_sidling;
+	int		is_rotating;
 	t_vec2	pos;
 	t_vec2	dir;
 	t_vec2	plane;
@@ -192,6 +204,7 @@ void	ft_exit_error(const char *str);
 int		split_size(char *str, char c);
 bool	str_all_num(char *str);
 uint32_t	get_color(t_img img, int x, int y);
+void	clear_img(t_img *img);
 
 //map_read.c
 void	get_map_size(char *filename, t_game *game);
@@ -234,5 +247,16 @@ bool	color_set_check(t_game *game);
 
 //ptrarr_utlis.c
 void	ptrarr_free(void **ptrarr);
+
+//mlx_hook.c
+int	key_press_hook(int keycode, t_game *game);
+int key_release_hook(int keycode, t_game *game);
+int		main_loop(t_game *game);
+
+//re_set_player.c
+void	re_set_player(t_game *game);
+
+//error.c
+bool	have_ber(const char *filename);
 
 #endif

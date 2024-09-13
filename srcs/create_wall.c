@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_wall.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktakamat <ktakamat@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:21:15 by machi             #+#    #+#             */
-/*   Updated: 2024/09/12 22:25:59 by ktakamat         ###   ########.fr       */
+/*   Updated: 2024/09/13 16:44:59 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void initialized_ray(t_game *game, t_ray *ray, int x)
 
 void	simulate_ray(t_game *game, t_ray *ray)
 {
+	// printf("game->map_str[ray->map_y][ray->map_x]: %c\n", game->map_str[ray->map_y][ray->map_x]);
 	while (game->map_str[ray->map_y][ray->map_x] != '1')
 	{
 		if (ray->side_dist_x < ray->side_dist_y)
@@ -133,6 +134,8 @@ void	create_wall(t_game *game)
 	x = 0;
 	while (x < SCREEN_WIDTH)
 	{
+		// printf("game->player.x: %d\n", game->player.x);
+		// printf("game->player.y: %d\n", game->player.y);
 		initialized_ray(game, &ray, x);
 		simulate_ray(game, &ray);
 		game->dist_buffer[x] = ray.perp_wall_dist;
