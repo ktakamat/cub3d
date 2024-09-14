@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
+/*   By: machi <machi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/27 12:19:03 by machi             #+#    #+#             */
-/*   Updated: 2024/09/14 15:52:28 by apple            ###   ########.fr       */
+/*   Created: 2023/09/18 16:01:22 by machi             #+#    #+#             */
+/*   Updated: 2023/10/02 15:32:47 by machi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 # include <fcntl.h>
 # include <unistd.h>
@@ -20,8 +20,9 @@
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 4
-# define OPEN_MAX 10240
 # endif
+
+# define OPEN_MAX 10240
 
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s1);

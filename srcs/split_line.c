@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 12:59:19 by machi             #+#    #+#             */
-/*   Updated: 2024/09/11 14:20:21 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/14 17:22:42 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,31 +60,7 @@ void	split_line(t_game *game)
 		i++;
 	}
 }
-// void	split_line(t_game *game)
-// {
-// 	size_t	i;
-	
-// 	i = 0;
-// 	while (i < game->hei)
-// 	{
-// 		if (game->all_str[i][0])
-// 		{
-// 			if (ft_strncmp(game->all_str[i], "NO ", 3) == 0)
-// 				game->no_str = ft_strdup(game->all_str[i] + 3);
-// 			if (ft_strncmp(game->all_str[i], "SO ", 3) == 0)
-// 				game->so_str = ft_strdup(game->all_str[i] + 3);
-// 			if (ft_strncmp(game->all_str[i], "WE ", 3) == 0)
-// 				game->we_str = ft_strdup(game->all_str[i] + 3);
-// 			if (ft_strncmp(game->all_str[i], "EA ", 3) == 0)
-// 				game->ea_str = ft_strdup(game->all_str[i] + 3);
-// 			if (ft_strncmp(game->all_str[i], "F ", 2) == 0)
-// 				game->f_str = ft_strdup(game->all_str[i] + 2);
-// 			if (ft_strncmp(game->all_str[i], "C ", 2) == 0)
-// 				game->c_str = ft_strdup(game->all_str[i] + 2);
-// 		}
-// 		i++;
-// 	}
-// }
+
 
 //mapの文字列だけを取り出す
 void	store_map(t_game *game)
@@ -99,6 +75,8 @@ void	store_map(t_game *game)
 	count = 0;
 	flag = 0;
 	height = game->hei;
+	if (game->all_str[game->hei - 1][0] != '1' && game->all_str[game->hei - 1][0] != ' ')
+		ft_exit_error("Error\nInvalid map");
 	while (i < game->hei)
 	{
 		if (game->all_str[i][0])
@@ -109,7 +87,7 @@ void	store_map(t_game *game)
 				count++;
 				i++;
 			}
-			if (game->all_str[i][0] == ' ' || game->all_str[i][0] == '1'
+			else if (game->all_str[i][0] == ' ' || game->all_str[i][0] == '1'
 				|| game->all_str[i][0] == '0')
 			{
 				flag = 1;
@@ -126,6 +104,7 @@ void	store_map(t_game *game)
 					j++;
 				}
 				i++;
+				
 			}
 		}
 	}

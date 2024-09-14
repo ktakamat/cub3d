@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
+/*   By: machi <machi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 12:19:03 by machi             #+#    #+#             */
-/*   Updated: 2024/09/14 15:52:28 by apple            ###   ########.fr       */
+/*   Updated: 2023/08/28 15:50:24 by machi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 4
-# define OPEN_MAX 10240
 # endif
 
 size_t	ft_strlen(const char *s);

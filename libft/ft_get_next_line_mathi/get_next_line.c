@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 17:08:29 by machi             #+#    #+#             */
-/*   Updated: 2024/09/14 15:52:07 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/12 17:45:33 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*read_file(int fd, char *save)
 }
 
 char	*get_line(char *save)
-{
+{	
 	char	*line;
 	size_t	i;
 
@@ -79,20 +79,21 @@ char	*reset_save(char *save)
 
 char	*get_next_line(int fd)
 {
-	static char	*save[OPEN_MAX];
+	static char	*save;
 	char		*line;
+
 
 	if (fd < 0 || BUFFER_SIZE < 0)
 		return (NULL);
-	save[fd] = read_file(fd, save[fd]);
-	if (!save[fd] || !(*save[fd]))
+	save = read_file(fd, save);
+	if (!save || !(*save))
 	{
-		free(save[fd]);
+		free(save);
 		return (NULL);
 	}
-	line = get_line(save[fd]);
+	line = get_line(save);
 	if (!line)
 		return (NULL);
-	save[fd] = reset_save(save[fd]);
+	save = reset_save(save);
 	return (line);
 }
