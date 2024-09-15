@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 13:01:12 by machi             #+#    #+#             */
-/*   Updated: 2024/09/15 18:45:26 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/15 18:49:41 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	check_game_member(t_game *game)
 		ft_exit_error("Error\nFailed to read file");
 	if (game->wid == 0 || game->hei == 0)
 		ft_exit_error("Error\nFailed to read file");
+	if (game->wid >= 100 || game->hei >= 100)
+		ft_exit_error("Error\nMap size is too large");
 }
 
 void	map_word_check(t_game *game)
