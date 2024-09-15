@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 13:01:12 by machi             #+#    #+#             */
-/*   Updated: 2024/09/15 15:59:12 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/15 18:45:26 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ void	map_word_check(t_game *game)
 					game->player_count++;
 					game->player.x = j;
 					game->player.y = i;
-					printf("game->player.xddd = %d\n", game->player.x);
-					printf("game->player.y ddd= %d\n", game->player.y);
 				}
 			j++;
 		}

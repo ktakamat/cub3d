@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 14:32:45 by apple             #+#    #+#             */
-/*   Updated: 2024/09/15 17:24:14 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/15 18:44:15 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,12 @@ int key_release_hook(int keycode, t_game *game)
 	if (keycode == KEY_LEFT || keycode == KEY_RIGHT)
 		game->player.is_rotating = 0;
 	return (0);
+}
+
+int	exit_game(t_game *game)
+{
+	mlx_destroy_window(game->mlx, game->win);
+	exit(0);
 }
 
 int		main_loop(t_game *game)

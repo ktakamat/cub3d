@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:12:07 by ktakamat          #+#    #+#             */
-/*   Updated: 2024/09/15 16:20:01 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/15 18:30:56 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,6 +253,7 @@ void	ptrarr_free(void **ptrarr);
 //mlx_hook.c
 int	key_press_hook(int keycode, t_game *game);
 int key_release_hook(int keycode, t_game *game);
+int	exit_game(t_game *game);
 int		main_loop(t_game *game);
 
 //re_set_player.c
