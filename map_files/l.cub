@@ -1,10 +1,10 @@
 NO ./textures/N.xpm
+EA ./textures/E.xpm
 SO ./textures/S.xpm
 WE ./textures/W.xpm
-EA ./textures/E.xpm
 
 F 112,112,112
-C 54,57,56
+C 54,57,50
 
 
 

@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 12:59:19 by machi             #+#    #+#             */
-/*   Updated: 2024/09/15 20:38:40 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/15 22:10:13 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,7 +244,9 @@ void	store_map(t_game *game)
 				count++;
 				i++;
 			}
-			else if (game->all_str[i][0] == ' ' || game->all_str[i][0] == '1'
+			if (count > 0 && game->all_str[i][0] == '\n')
+				ft_exit_error("Error\nInvalid map");
+			if (game->all_str[i][0] == ' ' || game->all_str[i][0] == '1'
 				|| game->all_str[i][0] == '0')
 			{
 				flag = 1;
@@ -256,12 +258,11 @@ void	store_map(t_game *game)
 					&& game->all_str[i][j] != 'S' && game->all_str[i][j] != 'E'
 					&& game->all_str[i][j] != 'W' && game->all_str[i][j] != '\n')
 					{
-						ft_exit_error("Error\ndInvalid map");
+						ft_exit_error("Error\nInvalid map");
 					}
 					j++;
 				}
 				i++;
-				
 			}
 		}
 	}
