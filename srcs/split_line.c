@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 12:59:19 by machi             #+#    #+#             */
-/*   Updated: 2024/09/15 22:10:13 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/15 22:34:47 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,19 +233,19 @@ void	store_map(t_game *game)
 	flag = 0;
 	height = game->hei;
 	if (game->all_str[game->hei - 1][0] != '1' && game->all_str[game->hei - 1][0] != ' ' || game->all_str[game->hei - 1][0] == '\0')
-		ft_exit_error("Error\nInvalid map");
+		ft_exit_error("Error\nInvalid map 1");
 	while (i < game->hei)
 	{
 		if (game->all_str[i][0])
 		{
+			if (game->all_str[i][0] == '\n' && flag == 1)
+				ft_exit_error("Error\nInvalid map 2");
 			if (game->all_str[i][0] != ' ' && game->all_str[i][0] != '1'
 				&& game->all_str[i][0] != '0')
 			{
 				count++;
 				i++;
 			}
-			if (count > 0 && game->all_str[i][0] == '\n')
-				ft_exit_error("Error\nInvalid map");
 			if (game->all_str[i][0] == ' ' || game->all_str[i][0] == '1'
 				|| game->all_str[i][0] == '0')
 			{
@@ -258,7 +258,7 @@ void	store_map(t_game *game)
 					&& game->all_str[i][j] != 'S' && game->all_str[i][j] != 'E'
 					&& game->all_str[i][j] != 'W' && game->all_str[i][j] != '\n')
 					{
-						ft_exit_error("Error\nInvalid map");
+						ft_exit_error("Error\nInvalid map 3");
 					}
 					j++;
 				}
