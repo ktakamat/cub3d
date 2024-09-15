@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 17:06:25 by apple             #+#    #+#             */
-/*   Updated: 2024/09/15 20:18:49 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/15 20:47:01 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ void	set_player(t_game *game)
 	{
 		game->player.dir.x = -1;
 		game->player.dir.y = 0;
-		game->player.plane.y = tan(change_pi(FOV / 2));
+		game->player.plane.y = -1 * tan(change_pi(FOV / 2));
 	}
 	else if (game->map_str[game->player.y][game->player.x] == 'W')
 	{
 		game->player.dir.x = 1;
 		game->player.dir.y = 0;
-		game->player.plane.y = -1 * tan(change_pi(FOV / 2));
+		game->player.plane.y = tan(change_pi(FOV / 2));
 	}
 	game->first_x = game->player.x;
 	game->first_y = game->player.y;

@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 14:32:45 by apple             #+#    #+#             */
-/*   Updated: 2024/09/15 20:19:24 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/15 20:50:20 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,21 @@ int	key_press_hook(int keycode, t_game *game)
 		game->player.is_sidling = -1;
 	if (keycode == KEY_D)
 		game->player.is_sidling = 1;
-	if (keycode == KEY_LEFT && (game->map_str[game->player.y][game->player.x] == 'N'
-			|| game->map_str[game->player.y][game->player.x] == 'S'))
+	// if (keycode == KEY_LEFT && (game->map_str[game->player.y][game->player.x] == 'N'
+	// 		|| game->map_str[game->player.y][game->player.x] == 'S'))
+	// 	game->player.is_rotating = 1;
+	// else if (keycode == KEY_LEFT && (game->map_str[game->player.y][game->player.x] == 'E'
+	// 		|| game->map_str[game->player.y][game->player.x] == 'W'))
+	// 	game->player.is_rotating = -1;
+	// if (keycode == KEY_RIGHT && (game->map_str[game->player.y][game->player.x] == 'W'
+	// 		|| game->map_str[game->player.y][game->player.x] == 'E'))
+	// 	game->player.is_rotating = 1;
+	// else if (keycode == KEY_RIGHT && (game->map_str[game->player.y][game->player.x] == 'N'
+	// 		|| game->map_str[game->player.y][game->player.x] == 'S'))
+	// 	game->player.is_rotating = -1;
+	if (keycode == KEY_LEFT)
 		game->player.is_rotating = 1;
-	else if (keycode == KEY_LEFT && (game->map_str[game->player.y][game->player.x] == 'E'
-			|| game->map_str[game->player.y][game->player.x] == 'W'))
-		game->player.is_rotating = -1;
-	if (keycode == KEY_RIGHT && (game->map_str[game->player.y][game->player.x] == 'W'
-			|| game->map_str[game->player.y][game->player.x] == 'E'))
-		game->player.is_rotating = 1;
-	else if (keycode == KEY_RIGHT && (game->map_str[game->player.y][game->player.x] == 'N'
-			|| game->map_str[game->player.y][game->player.x] == 'S'))
+	if (keycode == KEY_RIGHT)
 		game->player.is_rotating = -1;
 	if (keycode == KEY_ESC)
 	{

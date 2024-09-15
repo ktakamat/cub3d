@@ -58,4 +58,7 @@ fclean: clean
 
 re: fclean all
 
+valgrind: $(NAME)
+    valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --log-file=valgrind-out.txt ./$(NAME) map_files/l.cub
+
 .PHONY: all clean fclean re

@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 12:59:19 by machi             #+#    #+#             */
-/*   Updated: 2024/09/15 15:56:02 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/15 20:38:40 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,59 +22,202 @@ void	split_line(t_game *game)
 {
 	size_t	i;
 	char	*trim_str;
-	int		count;
+	int		no_count = 0; // NOの出現回数をカウント
+	int		so_count = 0; // SOの出現回数をカウント
+	int		we_count = 0; // WEの出現回数をカウント
+	int		ea_count = 0; // EAの出現回数をカウント
+	int		f_count = 0;  // Fの出現回数をカウント
+	int		c_count = 0;  // Cの出現回数をカウント
 
 	i = 0;
-	count = 0;
 	while (i < game->hei)
 	{
 		if (game->all_str[i][0])
 		{
-			if (ft_strncmp(game->all_str[i], "NO ", 3) == 0 && count == 0)
+			if (ft_strncmp(game->all_str[i], "NO ", 3) == 0)
 			{
-				trim_str = ft_strtrim(game->all_str[i] + 3, "\n"); // 改行文字を削除
+				no_count++;
+				if (no_count > 1)
+					ft_exit_error("Error\nDuplicate NO identifier."); // エラー処理
+				trim_str = ft_strtrim(game->all_str[i] + 3, "\n");
 				game->no_str = ft_strdup(trim_str);
-				count++;
-				free(trim_str); // trim_str を解放
+				free(trim_str);
 			}
-			else if (ft_strncmp(game->all_str[i], "SO ", 3) == 0 && count == 1)
+			else if (ft_strncmp(game->all_str[i], "SO ", 3) == 0)
 			{
+				so_count++;
+				if (so_count > 1)
+					ft_exit_error("Error\nDuplicate SO identifier."); // エラー処理
 				trim_str = ft_strtrim(game->all_str[i] + 3, "\n");
 				game->so_str = ft_strdup(trim_str);
-				count++;
 				free(trim_str);
 			}
-			else if (ft_strncmp(game->all_str[i], "WE ", 3) == 0 && count == 2)
+			else if (ft_strncmp(game->all_str[i], "WE ", 3) == 0)
 			{
+				we_count++;
+				if (we_count > 1)
+					ft_exit_error("Error\nDuplicate WE identifier."); // エラー処理
 				trim_str = ft_strtrim(game->all_str[i] + 3, "\n");
 				game->we_str = ft_strdup(trim_str);
-				count++;
 				free(trim_str);
 			}
-			else if (ft_strncmp(game->all_str[i], "EA ", 3) == 0 && count == 3)
+			else if (ft_strncmp(game->all_str[i], "EA ", 3) == 0)
 			{
+				ea_count++;
+				if (ea_count > 1)
+					ft_exit_error("Error\nDuplicate EA identifier."); // エラー処理
 				trim_str = ft_strtrim(game->all_str[i] + 3, "\n");
 				game->ea_str = ft_strdup(trim_str);
-				count++;
 				free(trim_str);
 			}
-			else if (ft_strncmp(game->all_str[i], "F ", 2) == 0 && count == 4)
+			else if (ft_strncmp(game->all_str[i], "F ", 2) == 0)
 			{
+				f_count++;
+				if (f_count > 1)
+					ft_exit_error("Error\nDuplicate F identifier."); // エラー処理
 				game->f_str = ft_strdup(game->all_str[i] + 2);
-				count++;
 			}
-			else if (ft_strncmp(game->all_str[i], "C ", 2) == 0 && count == 5)
+			else if (ft_strncmp(game->all_str[i], "C ", 2) == 0)
 			{
+				c_count++;
+				if (c_count > 1)
+					ft_exit_error("Error\nDuplicate C identifier."); // エラー処理
 				game->c_str = ft_strdup(game->all_str[i] + 2);
-				count++;
 			}
-			else if (game->all_str[i][0] != '\n' && count >= 0 && count <= 5)
-				ft_exit_error("Error\n Failed to read file");
 		}
 		i++;
 	}
 }
+// void	split_line(t_game *game)
+// {
+// 	size_t	i;
+// 	char	*trim_str;
 
+// 	i = 0;
+// 	while (i < game->hei)
+// 	{
+// 		if (game->all_str[i][0])
+// 		{
+// 			if (ft_strncmp(game->all_str[i], "NO ", 3) == 0)
+// 			{
+// 				trim_str = ft_strtrim(game->all_str[i] + 3, "\n");
+// 				game->no_str = ft_strdup(trim_str);
+// 				free(trim_str);
+// 			}
+// 			else if (ft_strncmp(game->all_str[i], "SO ", 3) == 0)
+// 			{
+// 				trim_str = ft_strtrim(game->all_str[i] + 3, "\n");
+// 				game->so_str = ft_strdup(trim_str);
+// 				free(trim_str);
+// 			}
+// 			else if (ft_strncmp(game->all_str[i], "WE ", 3) == 0)
+// 			{
+// 				trim_str = ft_strtrim(game->all_str[i] + 3, "\n");
+// 				game->we_str = ft_strdup(trim_str);
+// 				free(trim_str);
+// 			}
+// 			else if (ft_strncmp(game->all_str[i], "EA ", 3) == 0)
+// 			{
+// 				trim_str = ft_strtrim(game->all_str[i] + 3, "\n");
+// 				game->ea_str = ft_strdup(trim_str);
+// 				free(trim_str);
+// 			}
+// 			else if (ft_strncmp(game->all_str[i], "F ", 2) == 0)
+// 			{
+// 				game->f_str = ft_strdup(game->all_str[i] + 2);
+// 			}
+// 			else if (ft_strncmp(game->all_str[i], "C ", 2) == 0)
+// 			{
+// 				game->c_str = ft_strdup(game->all_str[i] + 2);
+// 			}
+// 		}
+// 		i++;
+// 	}
+// }
+
+// static void	parse_north_south_texture(t_game *game, size_t *i)
+// {
+// 	char	*trim_str;
+
+// 	if (ft_strncmp(game->all_str[*i], "NO ", 3) == 0)
+// 	{
+// 		if (game->no_str)
+// 			ft_exit_error("Error\nDuplicate NO identifier.");
+// 		trim_str = ft_strtrim(game->all_str[*i] + 3, "\n");
+// 		game->no_str = ft_strdup(trim_str);
+// 		free(trim_str);
+// 	}
+// 	else if (ft_strncmp(game->all_str[*i], "SO ", 3) == 0)
+// 	{
+// 		if (game->so_str)
+// 			ft_exit_error("Error\nDuplicate SO identifier.");
+// 		trim_str = ft_strtrim(game->all_str[*i] + 3, "\n");
+// 		game->so_str = ft_strdup(trim_str);
+// 		free(trim_str);
+// 	}
+// 	(*i)++;
+// }
+
+// // 西(WE)と東(EA)のテクスチャパスを処理する関数
+// static void	parse_west_east_texture(t_game *game, size_t *i)
+// {
+// 	char	*trim_str;
+
+// 	if (ft_strncmp(game->all_str[*i], "WE ", 3) == 0)
+// 	{
+// 		if (game->we_str)
+// 			ft_exit_error("Error\nDuplicate WE identifier.");
+// 		trim_str = ft_strtrim(game->all_str[*i] + 3, "\n");
+// 		game->we_str = ft_strdup(trim_str);
+// 		free(trim_str);
+// 	}
+// 	else if (ft_strncmp(game->all_str[*i], "EA ", 3) == 0)
+// 	{
+// 		if (game->ea_str)
+// 			ft_exit_error("Error\nDuplicate EA identifier.");
+// 		trim_str = ft_strtrim(game->all_str[*i] + 3, "\n");
+// 		game->ea_str = ft_strdup(trim_str);
+// 		free(trim_str);
+// 	}
+// 	(*i)++;
+// }
+
+// // 床(F)と天井(C)の色情報を処理する関数
+// static void	parse_floor_ceiling_color(t_game *game, size_t *i)
+// {
+// 	if (ft_strncmp(game->all_str[*i], "F ", 2) == 0)
+// 	{
+// 		if (game->f_str)
+// 			ft_exit_error("Error\nDuplicate F identifier.");
+// 		game->f_str = ft_strdup(game->all_str[*i] + 2);
+// 	}
+// 	else if (ft_strncmp(game->all_str[*i], "C ", 2) == 0)
+// 	{
+// 		if (game->c_str)
+// 			ft_exit_error("Error\nDuplicate C identifier.");
+// 		game->c_str = ft_strdup(game->all_str[*i] + 2);
+// 	}
+// 	(*i)++;
+// }
+
+// // split_line関数を分割したもの
+// void	split_line(t_game *game)
+// {
+// 	size_t	i;
+
+// 	i = 0;
+// 	while (i < game->hei)
+// 	{
+// 		if (game->all_str[i][0])
+// 		{
+// 			parse_north_south_texture(game, &i);
+// 			parse_west_east_texture(game, &i);
+// 			parse_floor_ceiling_color(game, &i);
+// 		}
+// 		else
+// 			i++;
+// 	}
+// }
 
 //mapの文字列だけを取り出す
 void	store_map(t_game *game)
