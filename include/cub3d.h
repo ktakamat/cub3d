@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:12:07 by ktakamat          #+#    #+#             */
-/*   Updated: 2024/09/15 15:15:08 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/15 16:20:01 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@
 # define ERROR 1
 # define FOV 66
 
+# define MOVE_PLAYER_SPEED 0.08
 # define PLAYER_HALF_ROTATE (M_PI / 300)
 # define FILE_EXTENSION ".cub"
 

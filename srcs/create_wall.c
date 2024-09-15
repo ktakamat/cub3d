@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:21:15 by machi             #+#    #+#             */
-/*   Updated: 2024/09/15 15:56:02 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/15 17:48:50 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void initialized_ray(t_game *game, t_ray *ray, int x)
 	ray->camera_x = 2 * x / (double)SCREEN_WIDTH - 1;
 	ray->dir.x = game->player.dir.x + game->player.plane.x * ray->camera_x;
 	ray->dir.y = game->player.dir.y + game->player.plane.y * ray->camera_x;
-	ray->map_x = (int)game->player.x;
-	ray->map_y = (int)game->player.y;
+	ray->map_x = (int)game->player.pos.x;
+	ray->map_y = (int)game->player.pos.y;
 	ray->delta_dist_x = (1 / ray->dir.x) < 0 ? -1 * (1 / ray->dir.x) : (1 / ray->dir.x);
 	ray->delta_dist_y = (1 / ray->dir.y) < 0 ? -1 * (1 / ray->dir.y) : (1 / ray->dir.y);
 	ray->step_x = ray->dir.x < 0 ? -1 : 1;
@@ -56,7 +56,6 @@ void	simulate_ray(t_game *game, t_ray *ray)
 
 void	wall_vis(t_game *game, t_ray ray, t_wall *wall_vis)
 {
-	//高さの基本ベースから距離によっての壁の高さを決める
 	wall_vis->line_hei = (int)(game->height_base / ray.perp_wall_dist);
 	wall_vis->draw_start = -wall_vis->line_hei / 2 + SCREEN_HEIGHT / 2;
 	if (wall_vis->draw_start < 0)
@@ -64,8 +63,6 @@ void	wall_vis(t_game *game, t_ray ray, t_wall *wall_vis)
 	wall_vis->draw_end = wall_vis->line_hei / 2 + SCREEN_HEIGHT / 2;
 	if (wall_vis->draw_end >= SCREEN_HEIGHT)
 		wall_vis->draw_end = SCREEN_HEIGHT - 1;
-	//ifのどこの側面に光線があたったかyかx
-	//それで壁上のどの部分をテクスチャで描画するか決定する
 	if (ray.side == 0)
 		wall_vis->wall_x = game->player.pos.y + ray.perp_wall_dist * ray.dir.y;
 	else
@@ -99,7 +96,6 @@ static void	draw_per_line(t_game *game, t_ray ray, t_wall *wall_vis,
 	y = 0;
 	while (y < SCREEN_HEIGHT)
 	{
-		//game->imgがNULLの場合はエラーを出力する
 		if (game->img.img == NULL)
 			ft_exit_error("Error\nimg Failed to initialize mlx cub3D");
 		if (y <= SCREEN_HEIGHT / 2)
@@ -129,12 +125,9 @@ void	create_wall(t_game *game)
 	x = 0;
 	while (x < SCREEN_WIDTH)
 	{
-		// printf("game->player.x: %d\n", game->player.x);
-		// printf("game->player.y: %d\n", game->player.y);
 		initialized_ray(game, &ray, x);
 		simulate_ray(game, &ray);
 		game->dist_buffer[x] = ray.perp_wall_dist;
-		// printf("game->dist_buffer[%d]: %f\n", x, game->dist_buffer[x]);
 		wall_vis(game, ray, &wall);
 		draw_per_line(game, ray, &wall, x);
 		x++;

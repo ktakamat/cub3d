@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 14:32:45 by apple             #+#    #+#             */
-/*   Updated: 2024/09/15 15:56:31 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/15 17:24:14 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	key_press_hook(int keycode, t_game *game)
 
 int key_release_hook(int keycode, t_game *game)
 {
+	printf("keycode = %d\n", keycode);
 	if (keycode == KEY_W || keycode == KEY_S)
 		game->player.is_moving = 0;
 	if (keycode == KEY_A || keycode == KEY_D)
