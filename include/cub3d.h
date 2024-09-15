@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:12:07 by ktakamat          #+#    #+#             */
-/*   Updated: 2024/09/14 15:32:31 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/15 14:54:34 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@
 # define X_EVENT_KEY_RELEASE 3
 # define KEY_ESC 65307
 # define KEY_W 119
-# define KEY_A 100
+# define KEY_A 97
 # define KEY_S 115
-# define KEY_D 97
-# define KEY_LEFT 113
-# define KEY_RIGHT 101
+# define KEY_D 100
+# define KEY_LEFT 65363
+# define KEY_RIGHT 65361
 
 # define KeyPress 2
 
