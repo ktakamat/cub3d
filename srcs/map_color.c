@@ -103,8 +103,12 @@ int	set_color(t_game *game)
 		ft_exit_error("Error\ncolor has already set");
 	if (game->f_str != NULL)
 		game->ground_color = color_f;
+	else
+		ft_exit_error("Error\nUnknow key is provided");
 	if (game->c_str != NULL)
 		game->sky_color = color_c;
+	else
+		ft_exit_error("Error\nUnknow key is provided");
 	if (game->f_str == NULL || game->c_str == NULL)
 		ft_exit_error("Error\nUnknow key is provided");
 	return (0);

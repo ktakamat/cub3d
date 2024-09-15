@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:21:15 by machi             #+#    #+#             */
-/*   Updated: 2024/09/13 16:44:59 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/15 15:56:02 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,6 @@ void initialized_ray(t_game *game, t_ray *ray, int x)
 	ray->camera_x = 2 * x / (double)SCREEN_WIDTH - 1;
 	ray->dir.x = game->player.dir.x + game->player.plane.x * ray->camera_x;
 	ray->dir.y = game->player.dir.y + game->player.plane.y * ray->camera_x;
-	// printf("game->player.plane.x: %f\n", game->player.plane.x);
-	// printf("game->player.plane.y: %f\n", game->player.plane.y);
-	// printf("ray->camera_x: %f\n", ray->camera_x);
-	// printf("ray->dir.x: %f\n", ray->dir.x);
 	ray->map_x = (int)game->player.x;
 	ray->map_y = (int)game->player.y;
 	ray->delta_dist_x = (1 / ray->dir.x) < 0 ? -1 * (1 / ray->dir.x) : (1 / ray->dir.x);
@@ -33,7 +29,6 @@ void initialized_ray(t_game *game, t_ray *ray, int x)
 
 void	simulate_ray(t_game *game, t_ray *ray)
 {
-	// printf("game->map_str[ray->map_y][ray->map_x]: %c\n", game->map_str[ray->map_y][ray->map_x]);
 	while (game->map_str[ray->map_y][ray->map_x] != '1')
 	{
 		if (ray->side_dist_x < ray->side_dist_y)

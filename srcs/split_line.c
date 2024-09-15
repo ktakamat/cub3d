@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 12:59:19 by machi             #+#    #+#             */
-/*   Updated: 2024/09/14 17:22:42 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/15 15:56:02 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,40 +22,54 @@ void	split_line(t_game *game)
 {
 	size_t	i;
 	char	*trim_str;
+	int		count;
 
 	i = 0;
+	count = 0;
 	while (i < game->hei)
 	{
 		if (game->all_str[i][0])
 		{
-			if (ft_strncmp(game->all_str[i], "NO ", 3) == 0)
+			if (ft_strncmp(game->all_str[i], "NO ", 3) == 0 && count == 0)
 			{
 				trim_str = ft_strtrim(game->all_str[i] + 3, "\n"); // 改行文字を削除
 				game->no_str = ft_strdup(trim_str);
+				count++;
 				free(trim_str); // trim_str を解放
 			}
-			if (ft_strncmp(game->all_str[i], "SO ", 3) == 0)
+			else if (ft_strncmp(game->all_str[i], "SO ", 3) == 0 && count == 1)
 			{
 				trim_str = ft_strtrim(game->all_str[i] + 3, "\n");
 				game->so_str = ft_strdup(trim_str);
+				count++;
 				free(trim_str);
 			}
-			if (ft_strncmp(game->all_str[i], "WE ", 3) == 0)
+			else if (ft_strncmp(game->all_str[i], "WE ", 3) == 0 && count == 2)
 			{
 				trim_str = ft_strtrim(game->all_str[i] + 3, "\n");
 				game->we_str = ft_strdup(trim_str);
+				count++;
 				free(trim_str);
 			}
-			if (ft_strncmp(game->all_str[i], "EA ", 3) == 0)
+			else if (ft_strncmp(game->all_str[i], "EA ", 3) == 0 && count == 3)
 			{
 				trim_str = ft_strtrim(game->all_str[i] + 3, "\n");
 				game->ea_str = ft_strdup(trim_str);
+				count++;
 				free(trim_str);
 			}
-			if (ft_strncmp(game->all_str[i], "F ", 2) == 0)
+			else if (ft_strncmp(game->all_str[i], "F ", 2) == 0 && count == 4)
+			{
 				game->f_str = ft_strdup(game->all_str[i] + 2);
-			if (ft_strncmp(game->all_str[i], "C ", 2) == 0)
+				count++;
+			}
+			else if (ft_strncmp(game->all_str[i], "C ", 2) == 0 && count == 5)
+			{
 				game->c_str = ft_strdup(game->all_str[i] + 2);
+				count++;
+			}
+			else if (game->all_str[i][0] != '\n' && count >= 0 && count <= 5)
+				ft_exit_error("Error\n Failed to read file");
 		}
 		i++;
 	}
@@ -75,7 +89,7 @@ void	store_map(t_game *game)
 	count = 0;
 	flag = 0;
 	height = game->hei;
-	if (game->all_str[game->hei - 1][0] != '1' && game->all_str[game->hei - 1][0] != ' ')
+	if (game->all_str[game->hei - 1][0] != '1' && game->all_str[game->hei - 1][0] != ' ' || game->all_str[game->hei - 1][0] == '\0')
 		ft_exit_error("Error\nInvalid map");
 	while (i < game->hei)
 	{

@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:12:07 by ktakamat          #+#    #+#             */
-/*   Updated: 2024/09/15 14:54:34 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/15 15:15:08 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,6 +212,7 @@ void	map_load(char *filename, t_game *game);
 
 //map_error.c
 void	map_word_check(t_game *game);
+void	check_game_member(t_game *game);
 
 //map_color.c
 int	set_color(t_game *game);

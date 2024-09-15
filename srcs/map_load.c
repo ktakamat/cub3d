@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 21:36:40 by apple             #+#    #+#             */
-/*   Updated: 2024/09/14 16:30:32 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/15 15:58:41 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,11 @@ void	map_load(char *filename, t_game *game)
 	if (!have_ber(filename))
 		ft_exit_error("Error\nFailed to open file");
 	fd = open(filename, O_RDONLY);
-	printf("map load 1\n");
 	get_map_size(filename, game);
-	printf("map load 2\n");
 	if (fd < 0)
 		ft_exit_error("Error\nFailed to open file");
 	//ここでmap_strにマップの情報を保存する
 	i = 0;
-	printf("game->hei = %zu\n", game->hei);
-	printf("game->wid = %zu\n", game->wid);
 	while (i < game->hei)
 	{
 		line = get_next_line(fd);
@@ -75,7 +71,6 @@ void	map_load(char *filename, t_game *game)
 		free(line);
 		i++;
 	}
-	printf("map load 3\n");
 	split_line(game);
 	store_map(game);
 	close(fd);
