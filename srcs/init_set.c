@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_set.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktakamat <ktakamat@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 17:06:25 by apple             #+#    #+#             */
-/*   Updated: 2024/09/12 21:09:36 by ktakamat         ###   ########.fr       */
+/*   Updated: 2024/09/15 14:43:29 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,15 @@ void	set_player(t_game *game)
 	}
 	else if (game->map_str[game->player.y][game->player.x] == 'E')
 	{
-		game->player.dir.x = 1;
+		game->player.dir.x = -1;
 		game->player.dir.y = 0;
-		game->player.plane.x = tan(change_pi(FOV / 2));
+		game->player.plane.y = tan(change_pi(FOV / 2));
 	}
 	else if (game->map_str[game->player.y][game->player.x] == 'W')
 	{
-		game->player.dir.x = -1;
+		game->player.dir.x = 1;
 		game->player.dir.y = 0;
-		game->player.plane.x = -1 * tan(change_pi(FOV / 2));
+		game->player.plane.y = -1 * tan(change_pi(FOV / 2));
 	}
 	game->player.pos.x = game->player.x + 0.5;
 	game->player.pos.y = game->player.y + 0.5;
