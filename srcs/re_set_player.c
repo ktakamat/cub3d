@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 15:46:46 by apple             #+#    #+#             */
-/*   Updated: 2024/09/15 17:53:32 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/15 20:23:29 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,26 @@ void	slide_player(t_game *game)
 	{
 		// printf("game->player.is_sidling = %d\n", game->player.is_sidling);
 		old_pos_x = game->player.pos.x;
-		game->player.pos.x += game->player.dir.y * game->player.is_sidling * MOVE_PLAYER_SPEED;
-		if (game->map_str[(int)game->player.pos.y][(int)game->player.pos.x] == '1')
-			game->player.pos.x = old_pos_x;
-		old_pos_y = game->player.pos.y;
-		game->player.pos.y -= game->player.dir.x * game->player.is_sidling * MOVE_PLAYER_SPEED;
-		if (game->map_str[(int)game->player.pos.y][(int)game->player.pos.x] == '1')
-			game->player.pos.y = old_pos_y;
+		if (game->map_str[game->first_y][game->first_x] == 'W' || game->map_str[game->first_y][game->first_x] == 'E')
+		{	
+			game->player.pos.x += game->player.dir.y * game->player.is_sidling * MOVE_PLAYER_SPEED;
+			if (game->map_str[(int)game->player.pos.y][(int)game->player.pos.x] == '1')
+				game->player.pos.x = old_pos_x;
+			old_pos_y = game->player.pos.y;
+			game->player.pos.y -= game->player.dir.x * game->player.is_sidling * MOVE_PLAYER_SPEED;
+			if (game->map_str[(int)game->player.pos.y][(int)game->player.pos.x] == '1')
+				game->player.pos.y = old_pos_y;
+		}
+		else if (game->map_str[game->first_y][game->first_x] == 'N' || game->map_str[game->first_y][game->first_x] == 'S')
+		{
+			game->player.pos.x += game->player.dir.y * -1 * game->player.is_sidling * MOVE_PLAYER_SPEED;
+			if (game->map_str[(int)game->player.pos.y][(int)game->player.pos.x] == '1')
+				game->player.pos.x = old_pos_x;
+			old_pos_y = game->player.pos.y;
+			game->player.pos.y -= game->player.dir.x * -1 * game->player.is_sidling * MOVE_PLAYER_SPEED;
+			if (game->map_str[(int)game->player.pos.y][(int)game->player.pos.x] == '1')
+				game->player.pos.y = old_pos_y;
+		}
 	}
 }
 

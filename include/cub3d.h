@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:12:07 by ktakamat          #+#    #+#             */
-/*   Updated: 2024/09/15 18:30:56 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/15 20:18:24 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,9 @@ typedef struct s_game
 	t_img		ea_tex;
 	uint32_t	ground_color;
 	uint32_t	sky_color;
-	bool	running;
+	bool		running;
+	int 		first_x;
+	int 		first_y;
 }	t_game;
 
 

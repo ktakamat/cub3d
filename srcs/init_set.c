@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 17:06:25 by apple             #+#    #+#             */
-/*   Updated: 2024/09/15 14:43:29 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/15 20:18:49 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	set_player(t_game *game)
 		game->player.dir.y = 0;
 		game->player.plane.y = -1 * tan(change_pi(FOV / 2));
 	}
+	game->first_x = game->player.x;
+	game->first_y = game->player.y;
 	game->player.pos.x = game->player.x + 0.5;
 	game->player.pos.y = game->player.y + 0.5;
 }
