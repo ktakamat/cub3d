@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 21:36:40 by apple             #+#    #+#             */
-/*   Updated: 2024/09/15 15:58:41 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/16 15:15:46 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	map_load(char *filename, t_game *game)
 		i++;
 	}
 	split_line(game);
-	store_map(game);
+	validate_map_format(game);
+	extract_map_data(game);
 	close(fd);
 }

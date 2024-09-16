@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:12:07 by ktakamat          #+#    #+#             */
-/*   Updated: 2024/09/15 20:39:54 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/16 15:15:04 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ typedef struct s_game
 	bool		running;
 	int 		first_x;
 	int 		first_y;
+	int 		map_start_index;
 }	t_game;
 
 
@@ -223,6 +224,8 @@ int	set_color(t_game *game);
 //split_line.c
 void	split_line(t_game *game);
 void	store_map(t_game *game);
+void	validate_map_format(t_game *game);
+void	extract_map_data(t_game *game);
 
 //debug.c
 void	print_map(t_game *game);

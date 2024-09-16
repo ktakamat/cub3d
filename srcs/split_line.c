@@ -6,7 +6,7 @@
 /*   By: apple <apple@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 12:59:19 by machi             #+#    #+#             */
-/*   Updated: 2024/09/15 22:34:47 by apple            ###   ########.fr       */
+/*   Updated: 2024/09/16 15:28:01 by apple            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,19 +219,15 @@ void	split_line(t_game *game)
 // 	}
 // }
 
-//mapの文字列だけを取り出す
-void	store_map(t_game *game)
+void	validate_map_format(t_game *game)
 {
 	size_t	i;
-	size_t	j;
-	size_t	height;
 	int		count;
 	int		flag;
 
 	i = 0;
 	count = 0;
 	flag = 0;
-	height = game->hei;
 	if (game->all_str[game->hei - 1][0] != '1' && game->all_str[game->hei - 1][0] != ' ' || game->all_str[game->hei - 1][0] == '\0')
 		ft_exit_error("Error\nInvalid map 1");
 	while (i < game->hei)
@@ -250,42 +246,33 @@ void	store_map(t_game *game)
 				|| game->all_str[i][0] == '0')
 			{
 				flag = 1;
-				j = 0;
-				while (game->all_str[i][j])
-				{
-					if (game->all_str[i][j] != ' ' && game->all_str[i][j] != '1'
-					&& game->all_str[i][j] != '0' && game->all_str[i][j] != 'N'
-					&& game->all_str[i][j] != 'S' && game->all_str[i][j] != 'E'
-					&& game->all_str[i][j] != 'W' && game->all_str[i][j] != '\n')
-					{
-						ft_exit_error("Error\nInvalid map 3");
-					}
-					j++;
-				}
 				i++;
 			}
 		}
 	}
-	if (flag == 1)
-	{
-		game->map_str = (char **)ft_calloc(sizeof(char *), height - count + 1);
-		if (!game->map_str)
-			ft_exit_error("Error\nFailed to allocate memory");
-		i = 0;
-		j = 0;
-		game->hei = height - count;
-		while (i < height)
-		{
-			if (game->all_str[i][0] == ' ' || game->all_str[i][0] == '1'
-				|| game->all_str[i][0] == '0')
-			{
-				game->map_str[j] = ft_strdup(game->all_str[i]);
-				j++;
-			}
-			i++;
-		}
-		game->map_str[j] = NULL;
-	}
-	else
+	game->map_start_index = count; // マップ開始行のインデックスを保存
+	if (flag == 0)
 		ft_exit_error("Error\nInvalid map");
+}
+
+void	extract_map_data(t_game *game)
+{
+	size_t	i;
+	size_t	j;
+	size_t	height;
+
+	i = game->map_start_index; // 保存したインデックスから開始
+	j = 0;
+	height = game->hei - game->map_start_index; 
+	game->map_str = (char **)ft_calloc(sizeof(char *), height + 1);
+	if (!game->map_str)
+		ft_exit_error("Error\nFailed to allocate memory");
+	game->hei = height;
+	while (i < game->hei + game->map_start_index)
+	{
+		game->map_str[j] = ft_strdup(game->all_str[i]);
+		j++;
+		i++;
+	}
+	game->map_str[j] = NULL;
 }
